@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1015273066077-7cfcp445csabf493lmmp5u37cjscn0g9.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1015273066077-7cfcp445csabf493lmmp5u37cjscn0g9</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCmP5dJK4sd_DuCHWJshFSjD4qu2cTh3UU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1015273066077</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.teahub</string>
+	<key>PROJECT_ID</key>
+	<string>teahub-user-authentication</string>
+	<key>STORAGE_BUCKET</key>
+	<string>teahub-user-authentication.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1015273066077:ios:43ddf369307437d42c07b4</string>
+</dict>
+</plist>
+
+
+
+
+
+
+
+
+
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCmP5dJK4sd_DuCHWJshFSjD4qu2cTh3UU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1015273066077</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.teahub</string>
+	<key>PROJECT_ID</key>
+	<string>teahub-user-authentication</string>
+	<key>STORAGE_BUCKET</key>
+	<string>teahub-user-authentication.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1015273066077:ios:43ddf369307437d42c07b4</string>
+</dict>
+</plist> -->

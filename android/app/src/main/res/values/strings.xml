@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TeaHub</string>
+    <string name="facebook_app_id">681370234209813</string>
+    <string name="fb_login_protocol_scheme">fb681370234209813</string>
+    <string name="facebook_client_token">a57e3fc0896e8f4ab654fb1498b46e71</string>
+</resources>
