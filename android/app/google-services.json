@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1015273066077",
+    "project_id": "teahub-user-authentication",
+    "storage_bucket": "teahub-user-authentication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015273066077:android:1f483103884e65f22c07b4",
+        "android_client_info": {
+          "package_name": "com.example.teahub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1015273066077-rebe4vbkuouga1e6394hd38u44rpb0bl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApGuilr0-2FnbAMW4H9Kjwa8gLa9biSlg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1015273066077-rebe4vbkuouga1e6394hd38u44rpb0bl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1015273066077-7cfcp445csabf493lmmp5u37cjscn0g9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.teahub"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
