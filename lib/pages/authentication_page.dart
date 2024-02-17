@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:teahub/pages/home_page.dart';
-import 'package:teahub/pages/login_page.dart';
-//import 'package:teahub/pages/signin_page.dart';
+//import 'package:teahub/pages/login_page.dart';
+import 'package:teahub/pages/signin_page.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -18,8 +18,12 @@ class AuthPage extends StatelessWidget {
             //.push(MaterialPageRoute(builder: (context) => HomePage()));
             return HomePage();
           } else {
-            //return SigninPage();
-            return const LoginPage();
+            return RegisterPage(
+              onTap: () {
+                Navigator.pop(context);
+              },
+            );
+            //return const LoginPage();
           }
         },
       ),

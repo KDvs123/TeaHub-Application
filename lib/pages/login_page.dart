@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:teahub/components/login_button.dart';
 import 'package:teahub/components/my_textfield.dart';
 import 'package:teahub/components/square_tile.dart';
-import 'package:teahub/pages/signin_page.dart';
 import 'package:teahub/services/authentication_service.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -187,8 +186,7 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => SigninPage()));
+            Navigator.pop(context);
           },
           icon: const Icon(
             Icons.arrow_back,
@@ -325,9 +323,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextButton(
                       onPressed: () {
-                        //Navigator.pop(context);
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SigninPage()));
+                        Navigator.pop(context);
                       },
                       child: const Text(
                         ' Register Now',
