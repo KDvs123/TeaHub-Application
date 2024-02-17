@@ -39,22 +39,25 @@ class _LoginPageState extends State<LoginPage> {
       //pop the loading circle
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
+      //Display exception in terminal
       print("Exception code : ${e.code}");
       //pop the loading circle
       Navigator.pop(context);
       //invalid user
       if (e.code == 'invalid-credential') {
-        //show error to user
+        //Display error to user
         invalidUserMessage();
       } else if (e.code == 'invalid-email') {
-        //show error to user
+        //Display error to user
         invalidEmailMessage();
       } else if (e.code == 'channel-error') {
+        //Display error to user
         emptyUserMessage();
       }
     }
   }
 
+  // Error message - Display an error message if the user input is empty
   void emptyUserMessage() {
     showDialog(
       context: context,
@@ -96,6 +99,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  // Email error message - Display error message if the user's email is invalid
   void invalidEmailMessage() {
     showDialog(
       context: context,
@@ -137,6 +141,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  // Invalid user message - Display error message if the user credentials are invalid
   void invalidUserMessage() {
     showDialog(
       context: context,
@@ -231,6 +236,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 30),
 
+                // Email textfield
                 MyTextField(
                   controller: emailController,
                   hintText: 'Enter your email',
@@ -239,6 +245,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 30),
 
+                // Password textfield
                 MyTextField(
                   controller: passwordController,
                   hintText: 'Enter your password',
@@ -262,6 +269,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 40),
 
+                //Login button
                 LoginButton(
                   onTap: UserLogin,
                 ),
@@ -293,6 +301,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 40),
 
+                //Facebook, Google and Apple icons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

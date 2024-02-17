@@ -12,7 +12,6 @@ class HomePage extends StatelessWidget {
   void signUserOut() {
     FirebaseAuth.instance.signOut();
     GoogleSignIn().signOut();
-    // Navigator.pop(context); // Close the dialog
   }
 
   @override

@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:teahub/pages/home_page.dart';
+//import 'package:teahub/pages/signin_page.dart';
 //import 'package:teahub/pages/login_page.dart';
-import 'package:teahub/pages/signin_page.dart';
+import 'package:teahub/pages/splash_screens.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -14,16 +15,21 @@ class AuthPage extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            //Navigator.of(context)
-            //.push(MaterialPageRoute(builder: (context) => HomePage()));
+            // if (Navigator.of(context).canPop()) {
+            //   Navigator.pop(context);
+            // }
+            if (Navigator.of(context).canPop()) {
+              // Use function to close the signin page after a short delay
+              Future.delayed(Duration.zero, () {
+                Navigator.pop(context);
+              });
+            }
+
+            // Return to the home page
             return HomePage();
           } else {
-            return RegisterPage(
-              onTap: () {
-                Navigator.pop(context);
-              },
-            );
-            //return const LoginPage();
+            // Display splash screens
+            return const splashScreens();
           }
         },
       ),

@@ -41,6 +41,9 @@ dependencies:
   firebase_auth: ^4.16.0
   google_sign_in: ^6.2.1
   flutter_facebook_auth: ^6.0.4
+  #introduction_screen: ^3.1.12
+  smooth_page_indicator: ^1.1.0
+  
   
 
   # #Firebase Database
@@ -56,6 +59,15 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  flutter_native_splash: ^2.3.10
+
+#Run commands to genarate splash screen
+# 1) flutter clean
+# 2) flutter pub get
+# 3) flutter pub run flutter_native_splash:create
+flutter_native_splash:
+  color: "#4ECB81"
+  image: lib\images\TeaHub_Logo.png
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -73,6 +85,10 @@ flutter:
     - lib/images/Google_icon.png
     - lib/images/Facebook_icon.png
     - lib/images/Apple_icon.png
+    - lib/images/screen_1.png
+    - lib/images/screen_2.png
+    - lib/images/screen_3.png
+    - lib/images/screen_4.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

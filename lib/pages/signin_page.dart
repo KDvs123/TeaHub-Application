@@ -46,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
         // show error message, passwords dont't match
         PasswordErrorMessage();
       }
-      // pop the loading circle
+
       //Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       print("Exception code : ${e.code}");
@@ -76,13 +76,14 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Text(
               message,
               style: const TextStyle(color: Colors.white),
-            ), // Text
-          ), // Center
-        ); //AlertDialog
+            ),
+          ),
+        );
       },
     );
   }
 
+  // Password error message - Display when user doesn't input the same password twice
   void PasswordErrorMessage() {
     showDialog(
       context: context,
@@ -124,6 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
+  // Password error message - Display when password is less than 6 digits
   void weakPasswordError() {
     showDialog(
       context: context,
@@ -165,6 +167,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
+  // Email error message - Display when input email is invalid
   void invalidEmail() {
     showDialog(
       context: context,
@@ -206,6 +209,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
+  // Error message - Display an error message if the user input is empty
   void channelError() {
     showDialog(
       context: context,
@@ -252,7 +256,9 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: const Icon(
             Icons.arrow_back,
             size: 35,
