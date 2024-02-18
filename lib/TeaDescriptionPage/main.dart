@@ -64,13 +64,40 @@ class MyApp extends StatelessWidget {
 class Tea {
   final String name;
   final String imageUrl;
+  final String alternativeName;
+  final String origin;
+  final String type;
+  final String caffeine;
+  final String caffeineLevel;
+  final String mainIngredients;
+  final String description;
+  final String colourDescription;
 
-  Tea({required this.name, required this.imageUrl});
+  Tea({
+    required this.name,
+    required this.imageUrl,
+    required this.alternativeName,
+    required this.origin,
+    required this.type,
+    required this.caffeine,
+    required this.caffeineLevel,
+    required this.mainIngredients,
+    required this.description,
+    required this.colourDescription
+    });
 
   factory Tea.fromJson(Map<String, dynamic> json) {
     return Tea(
-      name: json['name'] ?? '', // Provide default value if name is null
-      imageUrl: json['image'] ?? '', // Provide default value if imageUrl is null
+      name: json['name'] ?? '', 
+      imageUrl: json['image'] ?? '', 
+      alternativeName: json['altnames'] ?? 'None', 
+      origin: json['origin'] ?? '', 
+      type: json['type'] ?? '',
+      caffeine: json['caffeine'] ?? '', 
+      caffeineLevel: json['caffeineLevel'] ?? '', 
+      description: json['description'] ?? 'None', 
+      colourDescription: json['colorDescription'] ?? '', 
+      mainIngredients: json['tasteDescription'] ?? '', 
     );
   }
 }
