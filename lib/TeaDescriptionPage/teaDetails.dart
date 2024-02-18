@@ -93,6 +93,89 @@ class TeaDetailsWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              SizedBox(height:10),
+              Text(
+                  'Caffiene',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              SizedBox(height: 5),
+              Text(
+                'Moderate',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              SizedBox(height:10),
+              Text(
+                  'Caffiene Level',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              SizedBox(height: 5),
+              Text(
+                'Medium',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              SizedBox(height:10),
+              Text(
+                  'Main Ingredients',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              SizedBox(height: 5),
+              Text(
+                'Tea Leaves',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height:10),
+              Text(
+                  'Description',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              SizedBox(height: 5),
+              Text(
+                'Green Tea is a type of tea',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              SizedBox(height:10),
+              Text(
+                  'Colour Description',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              SizedBox(height: 5),
+              Text(
+                'Light Green',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
         ),
@@ -103,7 +186,8 @@ class TeaDetailsWidget extends StatelessWidget {
           child: Stack(
             children: [
               Positioned.fill(
-
+                top:50,
+                right:0;
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
