@@ -1,4 +1,4 @@
-# teahub
+# chatbotui
 
 A new Flutter project.
 
