@@ -1,5 +1,6 @@
+import 'package:chatbotui/chatbot_ui/core/utils/size_utils.dart';
+import 'package:chatbotui/chatbot_ui/widgets/custom_image_view.dart';
 import 'package:flutter/material.dart';
-import 'package:shenali_s_application1/core/app_export.dart';
 
 // ignore: must_be_immutable
 class AppbarLeadingImage extends StatelessWidget {

@@ -1,6 +1,8 @@
+import 'package:chatbotui/chatbot_ui/core/utils/size_utils.dart';
+import 'package:chatbotui/chatbot_ui/routes/app_routes.dart';
+import 'package:chatbotui/chatbot_ui/theme/theme_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'core/app_export.dart';
 
 var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
 void main() {
