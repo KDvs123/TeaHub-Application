@@ -1,9 +1,11 @@
+import 'package:chatbotui/pages/home_page.dart';
+import 'package:chatbotui/pages/splash_screens.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:teahub/pages/home_page.dart';
+//import 'package:teahub/pages/home_page.dart';
 //import 'package:teahub/pages/signin_page.dart';
 //import 'package:teahub/pages/login_page.dart';
-import 'package:teahub/pages/splash_screens.dart';
+//import 'package:teahub/pages/splash_screens.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});

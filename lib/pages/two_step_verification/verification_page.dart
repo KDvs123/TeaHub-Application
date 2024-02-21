@@ -1,8 +1,9 @@
 import 'dart:async';
 
+import 'package:chatbotui/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:teahub/pages/home_page.dart';
+//import 'package:teahub/pages/home_page.dart';
 
 class VerificationPage extends StatefulWidget {
   const VerificationPage({Key? key}) : super(key: key);
