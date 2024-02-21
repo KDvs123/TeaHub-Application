@@ -1,8 +1,13 @@
+import 'package:chatbotui/chatbot_ui/core/utils/size_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:shenali_s_application1/core/app_export.dart';
-import 'package:shenali_s_application1/widgets/app_bar/appbar_leading_image.dart';
-import 'package:shenali_s_application1/widgets/app_bar/custom_app_bar.dart';
-import 'package:shenali_s_application1/widgets/custom_text_form_field.dart';
+import '../../core/utils/image_constant.dart';
+import '../../theme/app_decoration.dart';
+import '../../theme/custom_text_style.dart';
+import '../../theme/theme_helper.dart';
+import '../../widgets/app_bar/appbar_leading_image.dart';
+import '../../widgets/app_bar/custom_app_bar.dart';
+import '../../widgets/custom_image_view.dart';
+import '../../widgets/custom_text_form_field.dart';
 
 class ChatbotScreen extends StatelessWidget {
   ChatbotScreen({Key? key})
