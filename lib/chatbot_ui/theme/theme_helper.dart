@@ -1,6 +1,5 @@
 import 'package:chatbotui/chatbot_ui/core/utils/size_utils.dart';
 import 'package:flutter/material.dart';
-import '../../core/app_export.dart';
 
 String _appTheme = "primary";
 
