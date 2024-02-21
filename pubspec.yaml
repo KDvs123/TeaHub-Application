@@ -43,6 +43,14 @@ dependencies:
   cached_network_image: ^3.3.0
   flutter_svg: ^2.0.9
 
+    #Firebase
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.16.0
+  google_sign_in: ^6.2.1
+  flutter_facebook_auth: ^6.0.4
+  #introduction_screen: ^3.1.12
+  smooth_page_indicator: ^1.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
