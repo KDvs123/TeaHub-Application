@@ -1,5 +1,5 @@
+import 'package:chatbotui/TeaDescriptionPage/main.dart';
 import 'package:flutter/material.dart';
-import 'package:api/main.dart';
 
 void main() {
   runApp(TeaDetailsApp());
@@ -32,7 +32,7 @@ class TeaDetailsPage extends StatelessWidget {
         child: Center(
           child: TeaDetailsWidget(tea: tea), // Pass the tea object to TeaDetailsWidget
         ),
-    );
+    ),
     );
   }
 }
@@ -87,7 +87,7 @@ class TeaDetailsWidget extends StatelessWidget {
             children: [
               Positioned.fill(
                 top:50,
-                right:0;
+                right:0,
                 bottom:0,
                 left:20,
                 child: Container(
