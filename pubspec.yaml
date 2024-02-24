@@ -42,6 +42,7 @@ dependencies:
   page_transition: ^2.0.5
   cached_network_image: ^3.3.0
   flutter_svg: ^2.0.9
+  google_fonts: ^6.1.0
 
     #Firebase
   firebase_core: ^2.24.2
@@ -74,6 +75,14 @@ assets:
   - assets/robot.jpg
   - assets/
   - assets/images/
+  - assets/images/bgimag.png
+  - assets/images/rectangle-8.png
+  - assets/images/headsetsvgrepocom.png
+  - assets/images/play-buttonsvgrepocom.png
+  - assets/images/vector-8MD.png
+  - assets/images/vector-SuD.png
+  - assets/images/vector-pGX.png
+  - assets/images/vector-UWj.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
