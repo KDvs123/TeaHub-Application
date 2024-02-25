@@ -103,6 +103,21 @@ assets:
   - assets/weather_animation/dust.json
   - assets/weather_animation/location_icon.json
 
+  #assets of user profile
+  - assets/user_profile/images/rectangle-51.png
+  - assets/user_profile/images/top.png
+  - assets/user_profile/images/rectangle-6.png
+  - assets/user_profile/images/group-62.png
+  - assets/user_profile/images/line-business-profile-line.png
+  - assets/user_profile/images/line-media-notification-3-line.png
+  - assets/user_profile/images/auto-group-oclv.png
+  - assets/user_profile/images/line-user-contacts-line.png
+  - assets/user_profile/images/line-communication-chat-quote-line.png
+  - assets/user_profile/images/line-system-lock-2-line.png
+  - assets/user_profile/images/float-btn-5hq.png
+  - assets/user_profile/images/bg-ysV.png
+  - assets/user_profile/images/scansvgrepocom-N6T.png
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
