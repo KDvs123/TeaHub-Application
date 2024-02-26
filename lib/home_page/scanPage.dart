@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:chatbotui/home_page/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 
 
 class ScanPage extends StatefulWidget {
@@ -14,29 +17,7 @@ class ScanPage extends StatefulWidget {
 
 class _ScanPageState extends State<ScanPage> {
   int _bottomNavIndex = 0;
-
-  //List of the pages
-  List<Widget> pages = const [
-    // // HomePage(),
-    // ChatbotPage(),
-    // TeaProfilePage(),
-    // ProfilePage(),
-  ];
-
-  List<IconData> iconList = [
-    
-    FontAwesomeIcons.images, // Font Awesome gallery icon
-    FontAwesomeIcons.question, // Font Awesome question mark icon
-    
-  ];
-
-  //List of the pages titles
-  List<String> titleList = [
-    
-    'Choose from gallery',
-    'Snaptips',
-    
-  ];
+  File? imageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -82,9 +63,7 @@ class _ScanPageState extends State<ScanPage> {
                   ),
                 ),
               ],
-              
             ),
-            
           ),
           Positioned(
             top: 100,
@@ -99,10 +78,19 @@ class _ScanPageState extends State<ScanPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      'assets/images/qr-code-scan.png',
-                      height: 500.0,
-                    ),
+                    imageFile == null
+                        ? Image.asset(
+                            'assets/images/qr-code-scan.png',
+                            height: 500.0,
+                          )
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.file(
+                              imageFile!,
+                              height: 500.0,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -122,29 +110,25 @@ class _ScanPageState extends State<ScanPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-  onPressed: () {
-    Navigator.push(
-      context,
-      PageTransition(
-        child: const ScanPage(),
-        type: PageTransitionType.bottomToTop,
+        onPressed: () {
+          _showImagePicker(context);
+        },
+        backgroundColor: Constants.primaryColor,
+        child: const FaIcon(
+          FontAwesomeIcons.camera,
+          color: Colors.white,
+        ),
       ),
-    );
-  },
-  backgroundColor: Constants.primaryColor,
-  child: const FaIcon(
-    FontAwesomeIcons.stop,
-    color: Colors.white,
-  ),
-),
-
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
-        backgroundColor: Colors.black, // Set background color to black
+        backgroundColor: Colors.black,
         splashColor: Constants.primaryColor,
         activeColor: Constants.primaryColor,
         inactiveColor: Colors.white,
-        icons: iconList,
+        icons: const [
+          FontAwesomeIcons.image,
+          FontAwesomeIcons.question,
+        ],
         activeIndex: _bottomNavIndex,
         gapLocation: GapLocation.center,
         notchSmoothness: NotchSmoothness.softEdge,
@@ -155,5 +139,126 @@ class _ScanPageState extends State<ScanPage> {
         },
       ),
     );
+  }
+
+  void _showImagePicker(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (builder) {
+        return Card(
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height / 5.2,
+            margin: const EdgeInsets.only(top: 8.0),
+            padding: const EdgeInsets.all(12),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: InkWell(
+                    child: const Column(
+                      children: [
+                        FaIcon(FontAwesomeIcons.images, size: 60.0),
+                        SizedBox(height: 12.0),
+                        Text(
+                          "Gallery",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 16, color: Colors.black),
+                        )
+                      ],
+                    ),
+                    onTap: () {
+                      _imgFromGallery();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: InkWell(
+                    child: const SizedBox(
+                      child: Column(
+                        children: [
+                          FaIcon(FontAwesomeIcons.camera, size: 60.0),
+                          SizedBox(height: 12.0),
+                          Text(
+                            "Camera",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 16, color: Colors.black),
+                          )
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      _imgFromCamera();
+                      Navigator.pop(context);
+                    },
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  final picker = ImagePicker();
+
+  _imgFromGallery() async {
+    await picker.pickImage(source: ImageSource.gallery, imageQuality: 50).then((value) {
+      if (value != null) {
+        _cropImage(File(value.path));
+      }
+    });
+  }
+
+  _imgFromCamera() async {
+    await picker.pickImage(source: ImageSource.camera, imageQuality: 50).then((value) {
+      if (value != null) {
+        _cropImage(File(value.path));
+      }
+    });
+  }
+
+  _cropImage(File imgFile) async {
+    final croppedFile = await ImageCropper().cropImage(
+      sourcePath: imgFile.path,
+      aspectRatioPresets: Platform.isAndroid
+          ? [
+              CropAspectRatioPreset.square,
+              CropAspectRatioPreset.ratio3x2,
+              CropAspectRatioPreset.original,
+              CropAspectRatioPreset.ratio4x3,
+              CropAspectRatioPreset.ratio16x9
+            ]
+          : [
+              CropAspectRatioPreset.original,
+              CropAspectRatioPreset.square,
+              CropAspectRatioPreset.ratio3x2,
+              CropAspectRatioPreset.ratio4x3,
+              CropAspectRatioPreset.ratio5x3,
+              CropAspectRatioPreset.ratio5x4,
+              CropAspectRatioPreset.ratio7x5,
+              CropAspectRatioPreset.ratio16x9
+            ],
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: "Image Cropper",
+          toolbarColor: Colors.deepOrange,
+          toolbarWidgetColor: Colors.white,
+          initAspectRatio: CropAspectRatioPreset.original,
+          lockAspectRatio: false,
+        ),
+        IOSUiSettings(
+          title: "Image Cropper",
+        )
+      ],
+    );
+    if (croppedFile != null) {
+      imageCache.clear();
+      setState(() {
+        imageFile = File(croppedFile.path);
+      });
+    }
   }
 }
