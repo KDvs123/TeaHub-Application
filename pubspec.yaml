@@ -96,6 +96,7 @@ assets:
   - assets/images/vector-pGX.png
   - assets/images/vector-UWj.png
   - assets/images/snap_tips imgs/
+  - assets/images/treatment_imgs/
 
   # assets of weather widget
   - assets/weather_animation/cloudy.json
