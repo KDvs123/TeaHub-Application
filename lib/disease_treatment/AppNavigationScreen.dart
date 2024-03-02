@@ -134,6 +134,7 @@ class AppNavigationScreen extends StatelessWidget {
               ),
             ),
           ),
+          // Container 1
           Positioned(
             top: 572,
             left: 25,
@@ -141,37 +142,29 @@ class AppNavigationScreen extends StatelessWidget {
               width: 117,
               height: 115,
               decoration: BoxDecoration(
-                color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
+                color: const Color.fromARGB(255, 255, 255, 255),
                 boxShadow: [
                   BoxShadow(
                     color: Color(0x40000000),
-                    offset: Offset(4, 4),
                     blurRadius: 4,
-                    spreadRadius: 3,
+                    offset: Offset(4, 4),
                   ),
                 ],
-                image: DecorationImage(
-                  image: AssetImage(
-                      'images/treatment_imgs/med 1.png'), // Replace 'image.png' with your image path
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Container(
-                width: 118,
-                height: 1,
-                margin: EdgeInsets.only(top: 87),
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                      width: 1,
-                      color: Color(0xFFF0F0F0), // #F0F0F0
-                    ),
-                  ),
-                ),
               ),
             ),
           ),
+          // Image 1
+          Positioned(
+            top: 572,
+            left: 44,
+            child: Image.asset(
+              'images/treatment_imgs/med 1.png',
+              width: 80,
+              height: 81,
+            ),
+          ),
+          // Container 2
           Positioned(
             top: 572,
             left: 222,
@@ -179,17 +172,26 @@ class AppNavigationScreen extends StatelessWidget {
               width: 117,
               height: 115,
               decoration: BoxDecoration(
-                color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
+                color: const Color.fromARGB(255, 255, 255, 255),
                 boxShadow: [
                   BoxShadow(
                     color: Color(0x40000000),
-                    offset: Offset(4, 4),
                     blurRadius: 4,
-                    spreadRadius: 3,
+                    offset: Offset(4, 4),
                   ),
                 ],
               ),
+            ),
+          ),
+          // Image 2
+          Positioned(
+            top: 572,
+            left: 241,
+            child: Image.asset(
+              'images/treatment_imgs/med 1.png',
+              width: 80,
+              height: 81,
             ),
           ),
         ],
