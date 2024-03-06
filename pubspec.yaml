@@ -99,15 +99,21 @@ assets:
   - assets/images/treatment_imgs/
 
   # assets of weather widget
-  - assets/weather_animation/cloudy.json
-  - assets/weather_animation/sunny.json
-  - assets/weather_animation/partly_cloudy.json
-  - assets/weather_animation/partly_rain.json
-  - assets/weather_animation/mist.json
-  - assets/weather_animation/rain.json
-  - assets/weather_animation/haze.json
-  - assets/weather_animation/dust.json
-  - assets/weather_animation/location_icon.json
+  - assets/weather_animation/loading.json
+  - assets/weather_animation/clear_day.json
+  - assets/weather_animation/clear_night.json
+  - assets/weather_animation/cloudy_day.json
+  - assets/weather_animation/cloudy_night.json
+  - assets/weather_animation/mist_day.json
+  - assets/weather_animation/mist_night.json
+  - assets/weather_animation/partly_cloudy_day.json
+  - assets/weather_animation/partly_cloudy_night.json
+  - assets/weather_animation/partly_rain_day.json
+  - assets/weather_animation/partly_rain_night.json
+  - assets/weather_animation/rain_day.json
+  - assets/weather_animation/rain_night.json
+  - assets/weather_animation/thunder_strom_day.json
+  - assets/weather_animation/thunder_storm_night.json
 
   #assets of user profile
   - assets/user_profile/images/rectangle-51.png

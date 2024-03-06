@@ -4,40 +4,78 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
-class WeatherDisplay extends StatelessWidget {
+class WeatherDisplay extends StatefulWidget {
   final Weather? weather;
 
   WeatherDisplay({this.weather});
 
+  @override
+  State<WeatherDisplay> createState() => _WeatherDisplayState();
+}
+
+class _WeatherDisplayState extends State<WeatherDisplay> {
   // Weather animation
   String getWeatherAnimation(String? mainCondition) {
+    DateTime now = DateTime.now();
     if (mainCondition == null) {
-      return 'assets/weather_animation/location_icon.json'; // Default weather condition
+      return 'assets/weather_animation/loading.json'; // Default weather condition
     }
 
     switch (mainCondition.toLowerCase()) {
       case 'clear':
-        return 'assets/weather_animation/sunny.json';
+        if (isHourInRange(now) && mainCondition.toLowerCase() == 'clear') {
+          return 'assets/weather_animation/clear_night.json';
+        } else {
+          return 'assets/weather_animation/clear_day.json';
+        }
+
       case 'clouds':
-        return 'assets/weather_animation/cloudy.json';
+        if (isHourInRange(now) && mainCondition.toLowerCase() == 'clouds') {
+          return 'assets/weather_animation/cloudy_night.json';
+        } else {
+          return 'assets/weather_animation/cloudy_day.json';
+        }
+
       case 'mist':
       case 'smoke':
       case 'fog':
-        return 'assets/weather_animation/mist.json';
       case 'haze':
-        return 'assets/weather_animation/haze.json';
       case 'dust':
-        return 'assets/weather_animation/dust.json';
+        if (isHourInRange(now) && mainCondition.toLowerCase() == 'mist') {
+          return 'assets/weather_animation/mist_night.json';
+        } else {
+          return 'assets/weather_animation/mist_day.json';
+        }
+
       case 'rain':
-        return 'assets/weather_animation/rain.json';
+        if (isHourInRange(now) && mainCondition.toLowerCase() == 'rain') {
+          return 'assets/weather_animation/rain_night.json';
+        } else {
+          return 'assets/weather_animation/rain_day.json';
+        }
+
       case 'drizzle':
-        return 'assets/weather_animation/partly_rain.json';
       case 'shower rain':
-        return 'assets/weather_animation/partly_rain.json';
+        if (isHourInRange(now) && mainCondition.toLowerCase() == 'drizzle') {
+          return 'assets/weather_animation/partly_rain_night.json';
+        } else {
+          return 'assets/weather_animation/partly_rain_day.json';
+        }
+
       case 'thunderstorm':
-        return 'assets/weather_animation/rain.json';
+        if (isHourInRange(now) &&
+            mainCondition.toLowerCase() == 'thunderstorm') {
+          return 'assets/weather_animation/thunder_strom_night.json';
+        } else {
+          return 'assets/weather_animation/thunder_strom_day.json';
+        }
+
       default:
-        return 'assets/weather_animation/sunny.json';
+        if (isHourInRange(now)) {
+          return 'assets/weather_animation/clear_night.json';
+        } else {
+          return 'assets/weather_animation/clear_day.json';
+        }
     }
   }
 
@@ -46,6 +84,11 @@ class WeatherDisplay extends StatelessWidget {
     DateTime now = DateTime.now();
     return DateFormat('EEEE')
         .format(now); // 'EEEE' will return the full name of the day
+  }
+
+  bool isHourInRange(DateTime dateTime) {
+    int hour = dateTime.hour;
+    return (hour >= 18 && hour <= 24) || (hour >= 1 && hour <= 4);
   }
 
   @override
@@ -81,14 +124,15 @@ class WeatherDisplay extends StatelessWidget {
                 children: [
                   // Weather condition
                   Text(
-                    weather?.mainCondition ?? "Weather...",
+                    widget.weather?.mainCondition ?? "Weather...",
                     style: const TextStyle(
                       fontSize: 16, // Change the font size
                       fontWeight: FontWeight.bold, // Make the text bold
                     ),
                   ),
                   // Weather animation
-                  Lottie.asset(getWeatherAnimation(weather?.mainCondition),
+                  Lottie.asset(
+                      getWeatherAnimation(widget.weather?.mainCondition),
                       height: 110),
                 ],
               ),
@@ -116,36 +160,38 @@ class WeatherDisplay extends StatelessWidget {
                 children: [
                   // City name, country
                   Text(
-                    weather != null
-                        ? '${weather!.cityName}, ${weather!.country}'
-                        : "location...",
+                    widget.weather != null
+                        ? '${widget.weather!.cityName}, ${widget.weather!.country}'
+                        : " Pleace Turn \n On Location",
                     style: const TextStyle(
-                      fontSize: 16, // Change the font size
+                      fontSize: 15.5, // Change the font size
                       fontWeight: FontWeight.bold, // Make the text bold
                     ),
                   ),
                   // Day
                   Text(
-                    '${getDayOfWeek()}',
+                    widget.weather != null ? '${getDayOfWeek()}' : "",
+                    //'${getDayOfWeek()}',
                     style: const TextStyle(
-                      fontSize: 16, // Change the font size
+                      fontSize: 15.5, // Change the font size
                       fontWeight: FontWeight.bold, // Make the text bold
                     ),
                   ),
                   // Temperature
                   Text(
-                    weather != null
-                        ? '${weather?.temperature.round()}°C'
-                        : '°C...',
+                    widget.weather != null
+                        ? '${widget.weather?.temperature.round()}°C'
+                        : "",
+                    //'${weather?.temperature.round()}°C',
                     style: const TextStyle(
                       fontSize: 30, // Change the font size
                       fontWeight: FontWeight.bold, // Make the text bold
                     ),
                   ),
                   Text(
-                    weather != null
-                        ? '${((weather!.temperature * 9 / 5) + 32).round()}°F'
-                        : '°F...',
+                    widget.weather != null
+                        ? '${((widget.weather!.temperature * 9 / 5) + 32).round()}°F'
+                        : "",
                     style: const TextStyle(
                       fontSize: 20, // Change the font size
                       fontWeight: FontWeight.bold, // Make the text bold
