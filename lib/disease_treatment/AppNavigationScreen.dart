@@ -8,7 +8,7 @@ class AppNavigationScreen extends StatelessWidget {
         children: [
           Positioned.fill(
             child: Image.asset(
-              'images/treatment_imgs/your_image.jpg',
+              'images/your_image.jpg',
               fit: BoxFit.cover,
             ),
           ),
@@ -159,7 +159,7 @@ class AppNavigationScreen extends StatelessWidget {
             top: 572,
             left: 44,
             child: Image.asset(
-              'images/treatment_imgs/med 1.png',
+              'images/med 1.png',
               width: 80,
               height: 81,
             ),
@@ -189,9 +189,76 @@ class AppNavigationScreen extends StatelessWidget {
             top: 572,
             left: 241,
             child: Image.asset(
-              'images/treatment_imgs/med 1.png',
+              'images/med 1.png',
               width: 80,
               height: 81,
+            ),
+          ),
+          // Container with line 1
+          Positioned(
+            top: 659,
+            left: 24,
+            child: Container(
+              width: 118,
+              height: 1,
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    width: 1,
+                    color: Color(0xFFF0F0F0),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          // Text below line 1
+          Positioned(
+            top: 674,
+            left: 24,
+            child: Text(
+              'Medicine 1',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0,
+                height: 1.5,
+                color: Colors.black,
+              ),
+            ),
+          ),
+
+          // Container with line 2
+          Positioned(
+            top: 661,
+            left: 222,
+            child: Container(
+              width: 118,
+              height: 1,
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    width: 1,
+                    color: Color(0xFFF0F0F0),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          // Text below line 2
+          Positioned(
+            top: 676,
+            left: 222,
+            child: Text(
+              'Medicine 2',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0,
+                height: 1.5,
+                color: Colors.black,
+              ),
             ),
           ),
         ],
