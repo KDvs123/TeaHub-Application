@@ -130,6 +130,19 @@ assets:
   - assets/user_profile/images/bg-ysV.png
   - assets/user_profile/images/scansvgrepocom-N6T.png
 
+  #assets of main interface
+    - assets/page-1/images/setting.png
+    - assets/page-1/images/stylelinear.png
+    - assets/page-1/images/vector.png
+    - assets/page-1/images/book-albumsvgrepocom.png
+    - assets/page-1/images/scansvgrepocom.png
+    - assets/page-1/images/vector-AHS.png
+    - assets/page-1/images/auto-group-ucn8.png
+    - assets/page-1/images/vector-8vg.png
+    - assets/page-1/images/assistant.png
+    - assets/page-1/images/vector-ax4.png
+    - assets/page-1/images/peperomia-obtusfolia.png
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
