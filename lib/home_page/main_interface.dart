@@ -48,7 +48,7 @@ class Scene extends StatelessWidget {
                       width: 12.96*fem,
                       height: 11.52*fem,
                       child: Image.asset(
-                        'assets/page-1/images/vector-AHS.png',
+                        'assets/images_main_interface/vector-AHS.png',
                         width: 12.96*fem,
                         height: 11.52*fem,
                       ),
@@ -59,7 +59,7 @@ class Scene extends StatelessWidget {
                       width: 18*fem,
                       height: 12.6*fem,
                       child: Image.asset(
-                        'assets/page-1/images/vector-8vg.png',
+                        'assets/images_main_interface/vector-8vg.png',
                         width: 18*fem,
                         height: 12.6*fem,
                       ),
@@ -69,7 +69,7 @@ class Scene extends StatelessWidget {
                       width: 18*fem,
                       height: 9*fem,
                       child: Image.asset(
-                        'assets/page-1/images/vector-ax4.png',
+                        'assets/images_main_interface/vector-ax4.png',
                         width: 18*fem,
                         height: 9*fem,
                       ),
@@ -87,7 +87,7 @@ class Scene extends StatelessWidget {
                   width: 40*fem,
                   height: 40*fem,
                   child: Image.asset(
-                    'assets/page-1/images/scansvgrepocom.png',
+                    'assets/images_main_interface/scansvgrepocom.png',
                     width: 40*fem,
                     height: 40*fem,
                   ),
@@ -110,7 +110,7 @@ class Scene extends StatelessWidget {
                       width: 43.77*fem,
                       height: 56*fem,
                       child: Image.asset(
-                        'assets/page-1/images/peperomia-obtusfolia.png',
+                        'assets/images_main_interface/peperomia-obtusfolia.png',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -120,7 +120,7 @@ class Scene extends StatelessWidget {
                       width: 24*fem,
                       height: 24*fem,
                       child: Image.asset(
-                        'assets/page-1/images/stylelinear.png',
+                        'assets/images_main_interface/stylelinear.png',
                         width: 24*fem,
                         height: 24*fem,
                       ),
@@ -160,7 +160,7 @@ class Scene extends StatelessWidget {
                   width: 24*fem,
                   height: 24*fem,
                   child: Image.asset(
-                    'assets/page-1/images/setting.png',
+                    'assets/images_main_interface/setting.png',
                     width: 24*fem,
                     height: 24*fem,
                   ),
@@ -225,7 +225,7 @@ class Scene extends StatelessWidget {
                             width: 30.5*fem,
                             height: 27.11*fem,
                             child: Image.asset(
-                              'assets/page-1/images/auto-group-ucn8.png',
+                              'assets/images_main_interface/auto-group-ucn8.png',
                               width: 30.5*fem,
                               height: 27.11*fem,
                             ),
@@ -270,7 +270,7 @@ class Scene extends StatelessWidget {
                             width: 34*fem,
                             height: 34*fem,
                             child: Image.asset(
-                              'assets/page-1/images/assistant.png',
+                              'assets/images_main_interface/assistant.png',
                               width: 34*fem,
                               height: 34*fem,
                             ),
@@ -314,7 +314,7 @@ class Scene extends StatelessWidget {
                             width: 34*fem,
                             height: 34*fem,
                             child: Image.asset(
-                              'assets/page-1/images/book-albumsvgrepocom.png',
+                              'assets/images_main_interface/book-albumsvgrepocom.png',
                               width: 34*fem,
                               height: 34*fem,
                             ),
@@ -369,7 +369,7 @@ class Scene extends StatelessWidget {
                       width: 10.17*fem,
                       height: 10.17*fem,
                       child: Image.asset(
-                        'assets/page-1/images/vector.png',
+                        'assets/images_main_interface/vector.png',
                         width: 10.17*fem,
                         height: 10.17*fem,
                       ),
