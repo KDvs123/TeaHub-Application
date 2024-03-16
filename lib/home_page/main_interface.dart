@@ -199,145 +199,150 @@ class Scene extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      // autogrouprgjnciG (23q1a2H5sYRcLMXhb2RgjN)
-                      margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 20*fem, 0*fem),
-                      padding: EdgeInsets.fromLTRB(17*fem, 26*fem, 16*fem, 11*fem),
-                      width: 95*fem,
-                      height: double.infinity,
-                      decoration: BoxDecoration (
-                        color: Color(0xff4ecb81),
-                        borderRadius: BorderRadius.circular(4*fem),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0x3f4ecb81),
-                            offset: Offset(4*fem, 4*fem),
-                            blurRadius: 2*fem,
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            // autogroupucn8Q8L (23q1h6uczYidmSsw4GucN8)
-                            margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 1.5*fem, 10.89*fem),
-                            width: 30.5*fem,
-                            height: 27.11*fem,
-                            child: Image.asset(
-                              'assets/images_main_interface/auto-group-ucn8.png',
-                              width: 30.5*fem,
-                              height: 27.11*fem,
-                            ),
-                          ),
-                          Text(
-                            // identifyKec (12:95)
-                            'Identify',
-                            textAlign: TextAlign.center,
-                            style: SafeGoogleFont (
-                              'Lexend',
-                              fontSize: 15*ffem,
-                              fontWeight: FontWeight.w600,
-                              height: 1.25*ffem/fem,
-                              color: Color(0xffffffff),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      // autogroupd8bnegt (23q1pWrwFPUPaC1UDhd8bN)
-                      margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 22*fem, 0*fem),
-                      padding: EdgeInsets.fromLTRB(25.5*fem, 20*fem, 26.5*fem, 12*fem),
-                      width: 95*fem,
-                      height: double.infinity,
-                      decoration: BoxDecoration (
-                        color: Color(0xffffffff),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0x3f000000),
-                            offset: Offset(4*fem, 4*fem),
-                            blurRadius: 2*fem,
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            // assistanthv4 (12:98)
-                            margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 9*fem),
-                            width: 34*fem,
-                            height: 34*fem,
-                            child: Image.asset(
-                              'assets/images_main_interface/assistant.png',
-                              width: 34*fem,
-                              height: 34*fem,
-                            ),
-                          ),
-                          Text(
-                            // assistQJg (12:96)
-                            'Assist',
-                            textAlign: TextAlign.center,
-                            style: SafeGoogleFont (
-                              'Lexend',
-                              fontSize: 15*ffem,
-                              fontWeight: FontWeight.w600,
-                              height: 1.25*ffem/fem,
-                              color: Color(0xff4ecb81),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      // autogroupk4v28Va (23q1wBLVx6h13Dda5EK4V2)
-                      padding: EdgeInsets.fromLTRB(20*fem, 23*fem, 13*fem, 13*fem),
-                      width: 95*fem,
-                      height: double.infinity,
-                      decoration: BoxDecoration (
-                        color: Color(0xffffffff),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0x3f000000),
-                            offset: Offset(4*fem, 4*fem),
-                            blurRadius: 2*fem,
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            // bookalbumsvgrepocomBik (12:140)
-                            margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 2*fem, 5*fem),
-                            width: 34*fem,
-                            height: 34*fem,
-                            child: Image.asset(
-                              'assets/images_main_interface/book-albumsvgrepocom.png',
-                              width: 34*fem,
-                              height: 34*fem,
-                            ),
-                          ),
-                          Text(
-                            // educatesba (12:97)
-                            'Educate',
-                            textAlign: TextAlign.center,
-                            style: SafeGoogleFont (
-                              'Lexend',
-                              fontSize: 15*ffem,
-                              fontWeight: FontWeight.w600,
-                              height: 1.25*ffem/fem,
-                              color: Color(0xff4ecb81),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+//Scan Page button
+                    // Container(
+                    //   // autogrouprgjnciG (23q1a2H5sYRcLMXhb2RgjN)
+                    //   margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 20*fem, 0*fem),
+                    //   padding: EdgeInsets.fromLTRB(17*fem, 26*fem, 16*fem, 11*fem),
+                    //   width: 95*fem,
+                    //   height: double.infinity,
+                    //   decoration: BoxDecoration (
+                    //     color: Color(0xff4ecb81),
+                    //     borderRadius: BorderRadius.circular(4*fem),
+                    //     boxShadow: [
+                    //       BoxShadow(
+                    //         color: Color(0x3f4ecb81),
+                    //         offset: Offset(4*fem, 4*fem),
+                    //         blurRadius: 2*fem,
+                    //       ),
+                    //     ],
+                    //   ),
+                    //   child: Column(
+                    //     crossAxisAlignment: CrossAxisAlignment.center,
+                    //     children: [
+                    //       Container(
+                    //         // autogroupucn8Q8L (23q1h6uczYidmSsw4GucN8)
+                    //         margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 1.5*fem, 10.89*fem),
+                    //         width: 30.5*fem,
+                    //         height: 27.11*fem,
+                    //         child: Image.asset(
+                    //           'assets/images_main_interface/auto-group-ucn8.png',
+                    //           width: 30.5*fem,
+                    //           height: 27.11*fem,
+                    //         ),
+                    //       ),
+                    //       Text(
+                    //         // identifyKec (12:95)
+                    //         'Identify',
+                    //         textAlign: TextAlign.center,
+                    //         style: SafeGoogleFont (
+                    //           'Lexend',
+                    //           fontSize: 15*ffem,
+                    //           fontWeight: FontWeight.w600,
+                    //           height: 1.25*ffem/fem,
+                    //           color: Color(0xffffffff),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+
+//ChatBot button
+                    // Container(
+                    //   // autogroupd8bnegt (23q1pWrwFPUPaC1UDhd8bN)
+                    //   margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 22*fem, 0*fem),
+                    //   padding: EdgeInsets.fromLTRB(25.5*fem, 20*fem, 26.5*fem, 12*fem),
+                    //   width: 95*fem,
+                    //   height: double.infinity,
+                    //   decoration: BoxDecoration (
+                    //     color: Color(0xffffffff),
+                    //     boxShadow: [
+                    //       BoxShadow(
+                    //         color: Color(0x3f000000),
+                    //         offset: Offset(4*fem, 4*fem),
+                    //         blurRadius: 2*fem,
+                    //       ),
+                    //     ],
+                    //   ),
+                    //   child: Column(
+                    //     crossAxisAlignment: CrossAxisAlignment.center,
+                    //     children: [
+                    //       Container(
+                    //         // assistanthv4 (12:98)
+                    //         margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 9*fem),
+                    //         width: 34*fem,
+                    //         height: 34*fem,
+                    //         child: Image.asset(
+                    //           'assets/images_main_interface/assistant.png',
+                    //           width: 34*fem,
+                    //           height: 34*fem,
+                    //         ),
+                    //       ),
+                    //       Text(
+                    //         // assistQJg (12:96)
+                    //         'Assist',
+                    //         textAlign: TextAlign.center,
+                    //         style: SafeGoogleFont (
+                    //           'Lexend',
+                    //           fontSize: 15*ffem,
+                    //           fontWeight: FontWeight.w600,
+                    //           height: 1.25*ffem/fem,
+                    //           color: Color(0xff4ecb81),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+              
+//Educate button
+            //         Container(
+            //           // autogroupk4v28Va (23q1wBLVx6h13Dda5EK4V2)
+            //           padding: EdgeInsets.fromLTRB(20*fem, 23*fem, 13*fem, 13*fem),
+            //           width: 95*fem,
+            //           height: double.infinity,
+            //           decoration: BoxDecoration (
+            //             color: Color(0xffffffff),
+            //             boxShadow: [
+            //               BoxShadow(
+            //                 color: Color(0x3f000000),
+            //                 offset: Offset(4*fem, 4*fem),
+            //                 blurRadius: 2*fem,
+            //               ),
+            //             ],
+            //           ),
+            //           child: Column(
+            //             crossAxisAlignment: CrossAxisAlignment.center,
+            //             children: [
+            //               Container(
+            //                 // bookalbumsvgrepocomBik (12:140)
+            //                 margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 2*fem, 5*fem),
+            //                 width: 34*fem,
+            //                 height: 34*fem,
+            //                 child: Image.asset(
+            //                   'assets/images_main_interface/book-albumsvgrepocom.png',
+            //                   width: 34*fem,
+            //                   height: 34*fem,
+            //                 ),
+            //               ),
+            //               Text(
+            //                 // educatesba (12:97)
+            //                 'Educate',
+            //                 textAlign: TextAlign.center,
+            //                 style: SafeGoogleFont (
+            //                   'Lexend',
+            //                   fontSize: 15*ffem,
+            //                   fontWeight: FontWeight.w600,
+            //                   height: 1.25*ffem/fem,
+            //                   color: Color(0xff4ecb81),
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
             Positioned(
               // autogroupqssuzw6 (23q2F5zKxkxmbysDZDQsSU)
               left: 43*fem,
@@ -465,6 +470,6 @@ class Scene extends StatelessWidget {
           ],
         ),
       ),
-          );
+    );
   }
 }
