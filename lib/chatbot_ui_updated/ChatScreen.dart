@@ -14,7 +14,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController controller = TextEditingController();
   final ScrollController scrollController = ScrollController();
-  List<Message> msgs = [];
+  List<Message?> msgs = [null];// Include a null at the start for the header
   bool isTyping = false;
 
   void sendMsg() async {
@@ -29,7 +29,7 @@ class _ChatScreenState extends State<ChatScreen> {
     });
     controller.clear();
     scrollController.animateTo(
-      0.0,
+      scrollController.position.maxScrollExtent + 100.0,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeOut,
     );
@@ -52,7 +52,7 @@ class _ChatScreenState extends State<ChatScreen> {
         var reply = data["choices"][0]["message"]["content"].toString().trimLeft();
         setState(() {
           isTyping = false;
-          msgs.insert(0, Message(sender: false, text: reply));
+          msgs.add(Message(sender: false, text: reply));
         });
       } else {
         throw Exception('Failed to load data');
@@ -79,113 +79,139 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       body: Column(
         children: [
-          SizedBox(height: 16), // Padding at the top
-          IntrinsicHeight( // Ensures that the row's height is governed by the tallest widget
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/teabot.png',
-                  width: 150, // Adjust the width to scale the image up
-                ),
-                SizedBox(width: 25), // Spacing between the image and the text
-                Text(
-                  "Hello!\nI'm TeaBot",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 36, // Increased size for the text
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 20),
           Expanded(
             child: ListView.builder(
-              padding: EdgeInsets.only(bottom: 160), // Space for the input field
+              padding: EdgeInsets.only(bottom: 160),
               controller: scrollController,
               itemCount: msgs.length,
-              reverse: true,
               itemBuilder: (context, index) {
-                return Align(
-                  alignment: msgs[index].sender
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                    child: BubbleNormal(
-                      text: msgs[index].text,
-                      isSender: msgs[index].sender,
-                      color: msgs[index].sender
-                          ? Colors.blue.shade100
-                          : Colors.grey.shade200,
-                      tail: true,
-                      textStyle: TextStyle(
-                        fontSize: 16,
-                        color: msgs[index].sender ? Colors.white : Colors.black87,
-                      ),
-                    ),
-                  ),
-                );
+                if (index == 0) { // Check for header
+                  return buildHeader();
+                } else {
+                  // Adjust for null header in index 0
+                  Message message = msgs[index]!;
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    child: buildMessage(message, message.sender),
+                  );
+                }
               },
             ),
           ),
-          SizedBox(height: 20),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 150, // Adjusted height for the input field
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30),
+          buildInputField(),
+        ],
+      ),
+    );
+  }
+  Widget buildHeader() {
+    // Build your header widget here
+    return Column(
+      children: [
+        SizedBox(height: 16),
+        IntrinsicHeight(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('assets/teabot.png', width: 150),
+              SizedBox(width: 25),
+              Text(
+                "Hello!\nI'm TeaBot",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
               ),
-              color: const Color.fromRGBO(78, 203, 113, 1),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: controller,
-                      textCapitalization: TextCapitalization.sentences,
-                      decoration: InputDecoration(
-                        hintText: "Enter text",
-                        border: InputBorder.none,
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide.none,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
-                      onSubmitted: (_) => sendMsg(),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  GestureDetector(
-                    onTap: sendMsg,
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: const BoxDecoration(
-                        color: Colors.blue,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(Icons.send, color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Widget buildMessage(Message message, bool isSender) {
+    // Build your message widget here
+    return Row(
+      mainAxisAlignment: isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
+      children: <Widget>[
+        if (!isSender) ...[
+          Icon(Icons.chat, color: Color(0xFF4ECB81)),
+          SizedBox(width: 8),
+        ],
+        Expanded(
+          child: BubbleNormal(
+            text: message.text,
+            isSender: isSender,
+            color: isSender ? Colors.blue : Color(0xFF4ECB81),
+            tail: true,
+            textStyle: TextStyle(
+              fontSize: 16,
+              color: isSender ? Colors.white : Colors.black87,
             ),
           ),
+        ),
+        if (isSender) ...[
+          SizedBox(width: 8),
+          Icon(Icons.account_circle, color: Colors.blue),
         ],
+      ],
+    );
+  }
+
+  Widget buildInputField() {
+    // Build your input field widget here
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 150,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
+        ),
+        color: const Color.fromRGBO(78, 203, 113, 1),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: controller,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: InputDecoration(
+                  hintText: "Enter text",
+                  border: InputBorder.none,
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+                onSubmitted: (_) => sendMsg(),
+              ),
+            ),
+            const SizedBox(width: 8),
+            GestureDetector(
+              onTap: sendMsg,
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                  color: Colors.blue,
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.send, color: Colors.white),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
