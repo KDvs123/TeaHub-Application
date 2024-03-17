@@ -13,6 +13,8 @@ class TeaProfile extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        // Backgroung color for light/dark mode
+        backgroundColor: Theme.of(context).colorScheme.background,
         // appBar: AppBar(
         //   title: Text('GridView Example'),
         // ),
@@ -21,7 +23,10 @@ class TeaProfile extends StatelessWidget {
           builder: (BuildContext context, AsyncSnapshot<List<Tea>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      Color.fromARGB(255, 78, 203, 128)),
+                ),
               );
             } else if (snapshot.hasError) {
               return Center(
@@ -135,6 +140,7 @@ class Frame1Widget extends StatelessWidget {
             ),
           ],
           color: Colors.white,
+          //color: Theme.of(context).colorScheme.primary,
         ),
         child: Stack(
           children: <Widget>[
@@ -212,7 +218,9 @@ class Frame1Widget extends StatelessWidget {
                         settings: RouteSettings(arguments: tea)),
                   );
                 },
-                child: Icon(Icons.arrow_forward, color: Colors.white),
+                child: Icon(
+                  Icons.arrow_forward,
+                ),
               ),
             ),
           ],

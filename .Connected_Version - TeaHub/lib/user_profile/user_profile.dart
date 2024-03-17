@@ -23,8 +23,8 @@ class UserProfile extends StatelessWidget {
       child: Container(
         // userprofilegyM (226:2601)
         width: double.infinity,
-        decoration: const BoxDecoration(
-          color: Color(0xffffffff),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.background,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +130,8 @@ class UserProfile extends StatelessWidget {
                                 fontSize: 22 * ffem,
                                 fontWeight: FontWeight.w600,
                                 height: 1.2727272727 * ffem / fem,
-                                color: const Color(0xff000000),
+                                //color: const Color(0xff000000),
+                                color: Theme.of(context).colorScheme.primary,
                               ),
                             ),
                           ),
@@ -143,7 +144,8 @@ class UserProfile extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                               height: 1.4285714286 * ffem / fem,
                               letterSpacing: 0.25 * fem,
-                              color: const Color(0xff000000),
+                              //color: const Color(0xff000000),
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                           ),
                         ],
@@ -169,7 +171,8 @@ class UserProfile extends StatelessWidget {
                         16 * fem, 14 * fem, 24 * fem, 11 * fem),
                     width: 342 * fem,
                     decoration: BoxDecoration(
-                      color: const Color(0xffffffff),
+                      //color: const Color(0xffffffff),
+                      color: Theme.of(context).colorScheme.tertiary,
                       borderRadius: BorderRadius.circular(8 * fem),
                       boxShadow: [
                         BoxShadow(
@@ -212,7 +215,8 @@ class UserProfile extends StatelessWidget {
                                   fontWeight: FontWeight.w400,
                                   height: 1.4285714286 * ffem / fem,
                                   letterSpacing: 0.25 * fem,
-                                  color: const Color(0xff000000),
+                                  //color: const Color(0xff000000),
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
                               ),
                             ],
@@ -249,7 +253,9 @@ class UserProfile extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                     height: 1.4285714286 * ffem / fem,
                                     letterSpacing: 0.25 * fem,
-                                    color: const Color(0xff000000),
+                                    //color: const Color(0xff000000),
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                               ),
@@ -296,7 +302,8 @@ class UserProfile extends StatelessWidget {
                                   fontWeight: FontWeight.w400,
                                   height: 1.4285714286 * ffem / fem,
                                   letterSpacing: 0.25 * fem,
-                                  color: const Color(0xff000000),
+                                  //color: const Color(0xff000000),
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
                               ),
                             ],
@@ -313,7 +320,8 @@ class UserProfile extends StatelessWidget {
                         16 * fem, 14 * fem, 24 * fem, 11 * fem),
                     width: 342 * fem,
                     decoration: BoxDecoration(
-                      color: const Color(0xffffffff),
+                      //color: const Color(0xffffffff),
+                      color: Theme.of(context).colorScheme.tertiary,
                       borderRadius: BorderRadius.circular(8 * fem),
                       boxShadow: [
                         BoxShadow(
@@ -356,7 +364,8 @@ class UserProfile extends StatelessWidget {
                                   fontWeight: FontWeight.w400,
                                   height: 1.4285714286 * ffem / fem,
                                   letterSpacing: 0.25 * fem,
-                                  color: const Color(0xff000000),
+                                  //color: const Color(0xff000000),
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
                               ),
                             ],
@@ -392,7 +401,8 @@ class UserProfile extends StatelessWidget {
                                   fontWeight: FontWeight.w400,
                                   height: 1.4285714286 * ffem / fem,
                                   letterSpacing: 0.25 * fem,
-                                  color: const Color(0xff000000),
+                                  //color: const Color(0xff000000),
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
                               ),
                             ],
@@ -426,7 +436,8 @@ class UserProfile extends StatelessWidget {
                                   fontWeight: FontWeight.w400,
                                   height: 1.4285714286 * ffem / fem,
                                   letterSpacing: 0.25 * fem,
-                                  color: const Color(0xff000000),
+                                  //color: const Color(0xff000000),
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
                               ),
                             ],

@@ -144,10 +144,12 @@ class _WeatherDisplayState extends State<WeatherDisplay> {
             child: ClipRRect(
               borderRadius:
                   BorderRadius.circular(20.0), // Adjust border radius as needed
-              child: const VerticalDivider(
+              child: VerticalDivider(
                 width: 4.0,
                 thickness: 4.0, // Adjust thickness as needed
-                color: Colors.white, // Change color as needed
+                color: Theme.of(context)
+                    .colorScheme
+                    .background, // Change color as needed
               ),
             ),
           ),

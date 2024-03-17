@@ -10,9 +10,9 @@ class TeaDetailsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Tea Details',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      // theme: ThemeData(
+      //   primarySwatch: Colors.grey,
+      // ),
       home: TeaDetailsPage(),
     );
   }
@@ -26,6 +26,7 @@ class TeaDetailsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.background,
         title: Text('Tea Details'),
       ),
       body: SingleChildScrollView(

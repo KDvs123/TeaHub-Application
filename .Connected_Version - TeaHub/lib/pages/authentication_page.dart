@@ -1,3 +1,4 @@
+import 'package:TeaHub/pages/LoginOrSignin_page.dart';
 import 'package:TeaHub/pages/splash_screens.dart';
 import 'package:TeaHub/pages/two_step_verification/verification_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,16 +25,13 @@ class AuthPage extends StatelessWidget {
             // Return to the home page
             //return HomePage();
 
-            // Return to the navigation page
-            //return TeaProfilePage();
-
             return VerificationPage();
           } else {
             // Display splash screens
-            return splashScreens();
+            //return splashScreens();
 
             // Display login or sign in page
-            //return LoginOrRegisterPage();
+            return LoginOrRegisterPage();
           }
         },
       ),

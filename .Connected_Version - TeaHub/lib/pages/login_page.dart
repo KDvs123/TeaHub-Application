@@ -74,6 +74,7 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.background,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
@@ -85,10 +86,11 @@ class _LoginPageState extends State<LoginPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          content: const Text(
+          content: Text(
             'Please enter your email and password.',
             style: TextStyle(
               fontSize: 16,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
           actions: <Widget>[
@@ -116,6 +118,7 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.background,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
@@ -127,10 +130,11 @@ class _LoginPageState extends State<LoginPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          content: const Text(
+          content: Text(
             'The provided email is invalid. Please check your email.',
             style: TextStyle(
               fontSize: 16,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
           actions: <Widget>[
@@ -158,6 +162,7 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.background,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
@@ -169,10 +174,11 @@ class _LoginPageState extends State<LoginPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          content: const Text(
+          content: Text(
             'The provided credentials are invalid. Please check your email and password.',
             style: TextStyle(
               fontSize: 16,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
           actions: <Widget>[
@@ -200,20 +206,21 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.background,
         leading: IconButton(
           onPressed: () {
             //Navigator.pop(context);
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => splashScreens()));
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back,
             size: 35,
-            color: Colors.black,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -221,27 +228,27 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 //Login text
-                const Text(
+                Text(
                   'Log In',
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Theme.of(context).colorScheme.primary,
                     fontSize: 45,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
 
-                const Text(
+                Text(
                   'Enter your Email and Password',
                   style: TextStyle(
-                    color: Colors.grey,
+                    color: Theme.of(context).colorScheme.secondary,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Text(
+                Text(
                   'and start creating',
                   style: TextStyle(
-                    color: Colors.grey,
+                    color: Theme.of(context).colorScheme.secondary,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
@@ -265,7 +272,7 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText: true,
                 ),
 
-                const Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -273,7 +280,7 @@ class _LoginPageState extends State<LoginPage> {
                       Text(
                         'Forgot password?',
                         style: TextStyle(
-                          color: Colors.grey,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                       ),
                     ],
@@ -289,7 +296,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 40),
 
-                const Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     children: [
@@ -305,7 +312,7 @@ class _LoginPageState extends State<LoginPage> {
                       Expanded(
                         child: Divider(
                           thickness: 0.5,
-                          color: Colors.grey,
+                          color: Theme.of(context).colorScheme.tertiary,
                         ),
                       ),
                     ],
@@ -340,8 +347,11 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       'Don\'t have an account?',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                     GestureDetector(
                       onTap: widget.onTap,

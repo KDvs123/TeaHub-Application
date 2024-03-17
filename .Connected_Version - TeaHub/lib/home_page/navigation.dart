@@ -1,3 +1,4 @@
+import 'package:TeaHub/chatbot_ui_updated/ChatScreen.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:TeaHub/TeaDescriptionPage/main.dart';
 import 'package:TeaHub/chatbot_ui/main.dart';
@@ -23,7 +24,7 @@ class _TeaProfilePageState extends State<navigationPage> {
   //List of the pages
   List<Widget> pages = [
     HomePage(),
-    chatApp(), // ChatbotPage(),
+    ChatScreen(), // ChatbotPage(),chatApp()
     TeaProfile(),
     const UserProfile(), // ProfilePage(),
   ];
@@ -46,28 +47,28 @@ class _TeaProfilePageState extends State<navigationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              titleList[_bottomNavIndex],
-              style: TextStyle(
-                color: Color(0xFF737373),
-                fontWeight: FontWeight.w500,
-                fontSize: 24,
-              ),
-            ),
-            FaIcon(
-              FontAwesomeIcons.bell,
-              color: Color(0xFF737373),
-              size: 30.0,
-            )
-          ],
-        ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 0.0,
-      ),
+      // appBar: AppBar(
+      //   title: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //     children: [
+      //       Text(
+      //         titleList[_bottomNavIndex],
+      //         style: TextStyle(
+      //           color: Theme.of(context).colorScheme.secondary,
+      //           fontWeight: FontWeight.w500,
+      //           fontSize: 24,
+      //         ),
+      //       ),
+      //       FaIcon(
+      //         FontAwesomeIcons.bell,
+      //         color: Theme.of(context).colorScheme.secondary,
+      //         size: 30.0,
+      //       )
+      //     ],
+      //   ),
+      //   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      //   elevation: 0.0,
+      // ),
       body: IndexedStack(
         index: _bottomNavIndex,
         children: pages,
