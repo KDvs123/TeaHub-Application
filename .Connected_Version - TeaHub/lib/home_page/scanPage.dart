@@ -172,6 +172,7 @@ class _ScanPageState extends State<ScanPage> {
       builder: (builder) {
         return Card(
           child: Container(
+            color: Theme.of(context).colorScheme.tertiary,
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height / 5.2,
             margin: const EdgeInsets.only(top: 8.0),
@@ -181,14 +182,20 @@ class _ScanPageState extends State<ScanPage> {
               children: [
                 Expanded(
                   child: InkWell(
-                    child: const Column(
+                    child: Column(
                       children: [
-                        FaIcon(FontAwesomeIcons.images, size: 60.0),
+                        FaIcon(
+                          FontAwesomeIcons.images,
+                          size: 60.0,
+                        ),
                         SizedBox(height: 12.0),
                         Text(
                           "Gallery",
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 16, color: Colors.black),
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                         )
                       ],
                     ),
@@ -200,7 +207,7 @@ class _ScanPageState extends State<ScanPage> {
                 ),
                 Expanded(
                   child: InkWell(
-                    child: const SizedBox(
+                    child: SizedBox(
                       child: Column(
                         children: [
                           FaIcon(FontAwesomeIcons.camera, size: 60.0),
@@ -208,7 +215,10 @@ class _ScanPageState extends State<ScanPage> {
                           Text(
                             "Camera",
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
                           )
                         ],
                       ),
@@ -273,7 +283,8 @@ class _ScanPageState extends State<ScanPage> {
       uiSettings: [
         AndroidUiSettings(
           toolbarTitle: "Image Cropper",
-          toolbarColor: Colors.deepOrange,
+          toolbarColor: Color.fromARGB(255, 78, 203, 128),
+          //toolbarColor: Colors.deepOrange,
           toolbarWidgetColor: Colors.white,
           initAspectRatio: CropAspectRatioPreset.original,
           lockAspectRatio: false,

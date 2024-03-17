@@ -29,27 +29,27 @@ class screen_4 extends StatelessWidget {
                     Radius.circular(25.0), // Set the desired top-right radius
               ),
               child: Container(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.background,
                 height: 410,
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: [
                     const SizedBox(height: 20),
-                    const Text(
+                    Text(
                       'Let\'s Create',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Theme.of(context).colorScheme.primary,
                         fontSize: 42,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 25),
-                    const Text(
+                    Text(
                       'Welcome to TeaHub',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.grey,
+                        color: Theme.of(context).colorScheme.secondary,
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
                       ),
@@ -105,11 +105,12 @@ class screen_4 extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
+                        Text(
                           'Already Have An Account? ',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                         ),
                         TextButton(

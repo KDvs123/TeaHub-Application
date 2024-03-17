@@ -95,6 +95,7 @@ class _RegisterPageState extends State<RegisterPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.background,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
@@ -106,10 +107,11 @@ class _RegisterPageState extends State<RegisterPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          content: const Text(
+          content: Text(
             'Email Address Already in Use.\nPlease choose a different email\naddress or log in using the\nexisting account.',
             style: TextStyle(
               fontSize: 16,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
           actions: <Widget>[
@@ -137,6 +139,7 @@ class _RegisterPageState extends State<RegisterPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.background,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
@@ -148,10 +151,11 @@ class _RegisterPageState extends State<RegisterPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          content: const Text(
+          content: Text(
             'Passwords do not match. Please make sure you enter \nthe same password twice \nfor authentication.',
             style: TextStyle(
               fontSize: 16,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
           actions: <Widget>[
@@ -179,6 +183,7 @@ class _RegisterPageState extends State<RegisterPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.background,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
@@ -190,10 +195,11 @@ class _RegisterPageState extends State<RegisterPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          content: const Text(
+          content: Text(
             'Weak password. Please ensure your password is longer than 6 digits for better security.',
             style: TextStyle(
               fontSize: 16,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
           actions: <Widget>[
@@ -221,6 +227,7 @@ class _RegisterPageState extends State<RegisterPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.background,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
@@ -232,10 +239,11 @@ class _RegisterPageState extends State<RegisterPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          content: const Text(
+          content: Text(
             'Invalid email address. Please enter a valid email address.',
             style: TextStyle(
               fontSize: 16,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
           actions: <Widget>[
@@ -263,6 +271,7 @@ class _RegisterPageState extends State<RegisterPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.background,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
@@ -274,10 +283,11 @@ class _RegisterPageState extends State<RegisterPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          content: const Text(
+          content: Text(
             'Please enter both your email address and password to proceed with Signin.',
             style: TextStyle(
               fontSize: 16,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
           actions: <Widget>[
@@ -303,45 +313,50 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.background,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back,
             size: 35,
-            color: Colors.black,
+            //color: Colors.black,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
           child: Center(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 'Sign Up',
                 style: TextStyle(
-                  color: Colors.black,
+                  //color: Colors.black,
+                  color: Theme.of(context).colorScheme.primary,
                   fontSize: 45,
                   fontWeight: FontWeight.bold,
                 ),
               ),
 
-              const Text(
+              Text(
                 'Enter your Email and Password',
                 style: TextStyle(
-                  color: Colors.grey,
+                  //color: Colors.grey,
+                  color: Theme.of(context).colorScheme.secondary,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const Text(
+              Text(
                 'and start creating',
                 style: TextStyle(
-                  color: Colors.grey,
+                  //color: Colors.grey,
+                  color: Theme.of(context).colorScheme.secondary,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
@@ -398,20 +413,23 @@ class _RegisterPageState extends State<RegisterPage> {
                     Expanded(
                       child: Divider(
                         thickness: 0.5,
-                        color: Colors.grey[400],
+                        //color: Colors.grey[400],
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Text(
                         'Or Register with',
-                        style: TextStyle(color: Colors.grey[700]),
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
                       ),
                     ),
                     Expanded(
                       child: Divider(
                         thickness: 0.5,
-                        color: Colors.grey[400],
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ],
@@ -447,8 +465,11 @@ class _RegisterPageState extends State<RegisterPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     'Already have an account?',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                   ),
                   const SizedBox(width: 4),
                   GestureDetector(

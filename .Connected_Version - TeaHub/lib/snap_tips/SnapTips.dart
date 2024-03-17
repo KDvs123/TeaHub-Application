@@ -18,7 +18,8 @@ class SnapTips extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24, // Adjust the font size as needed
                 fontWeight: FontWeight.bold,
-                color: Colors.black, // Font color black
+                //color: Colors.black, // Font color black
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
             SizedBox(height: 20), // Spacer between title and first larger image
@@ -166,7 +167,7 @@ class SnapTips extends StatelessWidget {
           style: TextStyle(
             fontSize: 12, // Adjust the font size as needed
             fontWeight: FontWeight.bold, // Make the text bold
-            color: Colors.black, // Font color black
+            //color: Colors.black, // Font color black
           ),
         ),
       ],
