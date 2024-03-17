@@ -24,7 +24,7 @@ class _ChatScreenState extends State<ChatScreen> {
     }
     String apiKey = "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"; // Replace with your actual API key
     setState(() {
-      msgs.insert(0, Message(sender: true, text: text));
+      msgs.add(Message(sender: true, text: text));
       isTyping = true;
     });
     controller.clear();
