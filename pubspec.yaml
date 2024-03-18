@@ -70,6 +70,7 @@ dependencies:
   flutter_native_splash: ^2.2.19
   flutter_launcher_icons: ^0.13.1
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -152,7 +153,10 @@ assets:
 
     #splash screen
     - assets/splashscreen/Animation.json
-     - assets/splashscreen/loader.json
+    - assets/splashscreen/loader.json
+
+    #edit profile page
+    -assets/editProfileImages
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -169,6 +173,12 @@ fonts:
       fonts: 
         - asset: assets/fonts/RedHatTextRomanLight.ttf
           weight: 300
+    - family: Roboto
+      fonts: 
+        - asset: assets/fonts/RobotoRegular.ttf
+          weight: 400
+        - asset: assets/fonts/RobotoRomanMedium.ttf
+          weight: 500
 
 
   # To add assets to your application, add an assets section, like this:
