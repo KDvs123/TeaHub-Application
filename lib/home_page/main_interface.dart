@@ -7,13 +7,16 @@ class Scene extends StatelessWidget {
     double baseWidth = 375;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
-    return Container(
+    return Scaffold(appBar: AppBar(
+      title: Text('Main Page'),
+    ),
+    body: Container(
       width: double.infinity,
       child: Container(
         // maininterfaceQL4 (12:51)
         width: double.infinity,
         height: 792*fem,
-        decoration: BoxDecoration (
+        decoration: const BoxDecoration (
           color: Color(0xffffffff),
         ),
         child: Stack(
@@ -48,7 +51,7 @@ class Scene extends StatelessWidget {
                       width: 12.96*fem,
                       height: 11.52*fem,
                       child: Image.asset(
-                        'assets/images_main_interface/vector-AHS.png',
+                        'assets/page-1/images/vector-AHS.png',
                         width: 12.96*fem,
                         height: 11.52*fem,
                       ),
@@ -59,7 +62,7 @@ class Scene extends StatelessWidget {
                       width: 18*fem,
                       height: 12.6*fem,
                       child: Image.asset(
-                        'assets/images_main_interface/vector-8vg.png',
+                        'assets/page-1/images/vector-8vg.png',
                         width: 18*fem,
                         height: 12.6*fem,
                       ),
@@ -69,7 +72,7 @@ class Scene extends StatelessWidget {
                       width: 18*fem,
                       height: 9*fem,
                       child: Image.asset(
-                        'assets/images_main_interface/vector-ax4.png',
+                        'assets/page-1/images/vector-ax4.png',
                         width: 18*fem,
                         height: 9*fem,
                       ),
@@ -87,7 +90,7 @@ class Scene extends StatelessWidget {
                   width: 40*fem,
                   height: 40*fem,
                   child: Image.asset(
-                    'assets/images_main_interface/scansvgrepocom.png',
+                    'assets/page-1/images/scansvgrepocom.png',
                     width: 40*fem,
                     height: 40*fem,
                   ),
@@ -110,7 +113,7 @@ class Scene extends StatelessWidget {
                       width: 43.77*fem,
                       height: 56*fem,
                       child: Image.asset(
-                        'assets/images_main_interface/peperomia-obtusfolia.png',
+                        'assets/page-1/images/peperomia-obtusfolia.png',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -120,7 +123,7 @@ class Scene extends StatelessWidget {
                       width: 24*fem,
                       height: 24*fem,
                       child: Image.asset(
-                        'assets/images_main_interface/stylelinear.png',
+                        'assets/page-1/images/stylelinear.png',
                         width: 24*fem,
                         height: 24*fem,
                       ),
@@ -160,7 +163,7 @@ class Scene extends StatelessWidget {
                   width: 24*fem,
                   height: 24*fem,
                   child: Image.asset(
-                    'assets/images_main_interface/setting.png',
+                    'assets/page-1/images/setting.png',
                     width: 24*fem,
                     height: 24*fem,
                   ),
@@ -189,6 +192,7 @@ class Scene extends StatelessWidget {
                 ),
               ),
             ),
+            // Navigation Buttons Section
             Positioned(
               // autogrouphs1eKjA (23q1HN6B7mP5fnUSxChs1E)
               left: 25*fem,
@@ -199,150 +203,177 @@ class Scene extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-//Scan Page button
-                    // Container(
-                    //   // autogrouprgjnciG (23q1a2H5sYRcLMXhb2RgjN)
-                    //   margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 20*fem, 0*fem),
-                    //   padding: EdgeInsets.fromLTRB(17*fem, 26*fem, 16*fem, 11*fem),
-                    //   width: 95*fem,
-                    //   height: double.infinity,
-                    //   decoration: BoxDecoration (
-                    //     color: Color(0xff4ecb81),
-                    //     borderRadius: BorderRadius.circular(4*fem),
-                    //     boxShadow: [
-                    //       BoxShadow(
-                    //         color: Color(0x3f4ecb81),
-                    //         offset: Offset(4*fem, 4*fem),
-                    //         blurRadius: 2*fem,
-                    //       ),
-                    //     ],
-                    //   ),
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.center,
-                    //     children: [
-                    //       Container(
-                    //         // autogroupucn8Q8L (23q1h6uczYidmSsw4GucN8)
-                    //         margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 1.5*fem, 10.89*fem),
-                    //         width: 30.5*fem,
-                    //         height: 27.11*fem,
-                    //         child: Image.asset(
-                    //           'assets/images_main_interface/auto-group-ucn8.png',
-                    //           width: 30.5*fem,
-                    //           height: 27.11*fem,
-                    //         ),
-                    //       ),
-                    //       Text(
-                    //         // identifyKec (12:95)
-                    //         'Identify',
-                    //         textAlign: TextAlign.center,
-                    //         style: SafeGoogleFont (
-                    //           'Lexend',
-                    //           fontSize: 15*ffem,
-                    //           fontWeight: FontWeight.w600,
-                    //           height: 1.25*ffem/fem,
-                    //           color: Color(0xffffffff),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-
-//ChatBot button
-                    // Container(
-                    //   // autogroupd8bnegt (23q1pWrwFPUPaC1UDhd8bN)
-                    //   margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 22*fem, 0*fem),
-                    //   padding: EdgeInsets.fromLTRB(25.5*fem, 20*fem, 26.5*fem, 12*fem),
-                    //   width: 95*fem,
-                    //   height: double.infinity,
-                    //   decoration: BoxDecoration (
-                    //     color: Color(0xffffffff),
-                    //     boxShadow: [
-                    //       BoxShadow(
-                    //         color: Color(0x3f000000),
-                    //         offset: Offset(4*fem, 4*fem),
-                    //         blurRadius: 2*fem,
-                    //       ),
-                    //     ],
-                    //   ),
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.center,
-                    //     children: [
-                    //       Container(
-                    //         // assistanthv4 (12:98)
-                    //         margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 9*fem),
-                    //         width: 34*fem,
-                    //         height: 34*fem,
-                    //         child: Image.asset(
-                    //           'assets/images_main_interface/assistant.png',
-                    //           width: 34*fem,
-                    //           height: 34*fem,
-                    //         ),
-                    //       ),
-                    //       Text(
-                    //         // assistQJg (12:96)
-                    //         'Assist',
-                    //         textAlign: TextAlign.center,
-                    //         style: SafeGoogleFont (
-                    //           'Lexend',
-                    //           fontSize: 15*ffem,
-                    //           fontWeight: FontWeight.w600,
-                    //           height: 1.25*ffem/fem,
-                    //           color: Color(0xff4ecb81),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-              
-//Educate button
-            //         Container(
-            //           // autogroupk4v28Va (23q1wBLVx6h13Dda5EK4V2)
-            //           padding: EdgeInsets.fromLTRB(20*fem, 23*fem, 13*fem, 13*fem),
-            //           width: 95*fem,
-            //           height: double.infinity,
-            //           decoration: BoxDecoration (
-            //             color: Color(0xffffffff),
-            //             boxShadow: [
-            //               BoxShadow(
-            //                 color: Color(0x3f000000),
-            //                 offset: Offset(4*fem, 4*fem),
-            //                 blurRadius: 2*fem,
-            //               ),
-            //             ],
-            //           ),
-            //           child: Column(
-            //             crossAxisAlignment: CrossAxisAlignment.center,
-            //             children: [
-            //               Container(
-            //                 // bookalbumsvgrepocomBik (12:140)
-            //                 margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 2*fem, 5*fem),
-            //                 width: 34*fem,
-            //                 height: 34*fem,
-            //                 child: Image.asset(
-            //                   'assets/images_main_interface/book-albumsvgrepocom.png',
-            //                   width: 34*fem,
-            //                   height: 34*fem,
-            //                 ),
-            //               ),
-            //               Text(
-            //                 // educatesba (12:97)
-            //                 'Educate',
-            //                 textAlign: TextAlign.center,
-            //                 style: SafeGoogleFont (
-            //                   'Lexend',
-            //                   fontSize: 15*ffem,
-            //                   fontWeight: FontWeight.w600,
-            //                   height: 1.25*ffem/fem,
-            //                   color: Color(0xff4ecb81),
-            //                 ),
-            //               ),
-            //             ],
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
+                    //Scan page button
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ScanPage()),
+                          );
+                        },
+                        child: Text('Scan'),
+                      ),
+                      SizedBox(width: 20 * fem), 
+                    Container(
+                      // autogrouprgjnciG (23q1a2H5sYRcLMXhb2RgjN)
+                      margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 20*fem, 0*fem),
+                      padding: EdgeInsets.fromLTRB(17*fem, 26*fem, 16*fem, 11*fem),
+                      width: 95*fem,
+                      height: double.infinity,
+                      decoration: BoxDecoration (
+                        color: Color(0xff4ecb81),
+                        borderRadius: BorderRadius.circular(4*fem),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0x3f4ecb81),
+                            offset: Offset(4*fem, 4*fem),
+                            blurRadius: 2*fem,
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            // autogroupucn8Q8L (23q1h6uczYidmSsw4GucN8)
+                            margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 1.5*fem, 10.89*fem),
+                            width: 30.5*fem,
+                            height: 27.11*fem,
+                            child: Image.asset(
+                              'assets/page-1/images/auto-group-ucn8.png',
+                              width: 30.5*fem,
+                              height: 27.11*fem,
+                            ),
+                          ),
+                          Text(
+                            // identifyKec (12:95)
+                            'Identify',
+                            textAlign: TextAlign.center,
+                            style: SafeGoogleFont (
+                              'Lexend',
+                              fontSize: 15*ffem,
+                              fontWeight: FontWeight.w600,
+                              height: 1.25*ffem/fem,
+                              color: Color(0xffffffff),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    //Chatbot Button
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ChatbotPage()),
+                          );
+                        },
+                        child: Text('Chatbot'),
+                      ),
+                      SizedBox(width: 20 * fem), // Adjust spacing as needed
+                    Container(
+                      // autogroupd8bnegt (23q1pWrwFPUPaC1UDhd8bN)
+                      margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 22*fem, 0*fem),
+                      padding: EdgeInsets.fromLTRB(25.5*fem, 20*fem, 26.5*fem, 12*fem),
+                      width: 95*fem,
+                      height: double.infinity,
+                      decoration: BoxDecoration (
+                        color: Color(0xffffffff),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0x3f000000),
+                            offset: Offset(4*fem, 4*fem),
+                            blurRadius: 2*fem,
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            // assistanthv4 (12:98)
+                            margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 9*fem),
+                            width: 34*fem,
+                            height: 34*fem,
+                            child: Image.asset(
+                              'assets/page-1/images/assistant.png',
+                              width: 34*fem,
+                              height: 34*fem,
+                            ),
+                          ),
+                          Text(
+                            // assistQJg (12:96)
+                            'Assist',
+                            textAlign: TextAlign.center,
+                            style: SafeGoogleFont (
+                              'Lexend',
+                              fontSize: 15*ffem,
+                              fontWeight: FontWeight.w600,
+                              height: 1.25*ffem/fem,
+                              color: Color(0xff4ecb81),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    //Educate button
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => EducatePage()),
+                          );
+                        },
+                        child: Text('Educate'),
+                    ),
+                    Container(
+                      // autogroupk4v28Va (23q1wBLVx6h13Dda5EK4V2)
+                      padding: EdgeInsets.fromLTRB(20*fem, 23*fem, 13*fem, 13*fem),
+                      width: 95*fem,
+                      height: double.infinity,
+                      decoration: BoxDecoration (
+                        color: Color(0xffffffff),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0x3f000000),
+                            offset: Offset(4*fem, 4*fem),
+                            blurRadius: 2*fem,
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            // bookalbumsvgrepocomBik (12:140)
+                            margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 2*fem, 5*fem),
+                            width: 34*fem,
+                            height: 34*fem,
+                            child: Image.asset(
+                              'assets/page-1/images/book-albumsvgrepocom.png',
+                              width: 34*fem,
+                              height: 34*fem,
+                            ),
+                          ),
+                          Text(
+                            // educatesba (12:97)
+                            'Educate',
+                            textAlign: TextAlign.center,
+                            style: SafeGoogleFont (
+                              'Lexend',
+                              fontSize: 15*ffem,
+                              fontWeight: FontWeight.w600,
+                              height: 1.25*ffem/fem,
+                              color: Color(0xff4ecb81),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             Positioned(
               // autogroupqssuzw6 (23q2F5zKxkxmbysDZDQsSU)
               left: 43*fem,
@@ -374,7 +405,7 @@ class Scene extends StatelessWidget {
                       width: 10.17*fem,
                       height: 10.17*fem,
                       child: Image.asset(
-                        'assets/images_main_interface/vector.png',
+                        'assets/page-1/images/vector.png',
                         width: 10.17*fem,
                         height: 10.17*fem,
                       ),
@@ -470,6 +501,7 @@ class Scene extends StatelessWidget {
           ],
         ),
       ),
+      )
     );
   }
 }
