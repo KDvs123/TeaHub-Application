@@ -66,6 +66,10 @@ dependencies:
   image_picker: ^0.8.5+3
   permission_handler: ^10.2.0
 
+  #splash screen
+  flutter_native_splash: ^2.2.19
+  flutter_launcher_icons: ^0.13.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -145,6 +149,10 @@ assets:
     - assets/page-1/images/assistant.png
     - assets/page-1/images/vector-ax4.png
     - assets/page-1/images/peperomia-obtusfolia.png
+
+    #splash screen
+    - assets/splashscreen/Animation.json
+     - assets/splashscreen/loader.json
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
