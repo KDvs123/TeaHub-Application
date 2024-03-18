@@ -16,6 +16,8 @@ class _ChatScreenState extends State<ChatScreen> {
   final ScrollController scrollController = ScrollController();
   List<Message?> msgs = [null];// Include a null at the start for the header
   bool isTyping = false;
+  bool showScrollToTopButton = false;
+
 
   void sendMsg() async {
     String text = controller.text.trim();
@@ -23,10 +25,17 @@ class _ChatScreenState extends State<ChatScreen> {
       return;
     }
     String apiKey = "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"; // Replace with your actual API key
+    
+    // Add the user's message to the chat
+
     setState(() {
-      msgs.add(Message(sender: true, text: text));
+      msgs.add(Message(sender: true, text: text)); 
+
       isTyping = true;
     });
+
+    // Clear input field and animate scroll
+
     controller.clear();
     scrollController.animateTo(
       scrollController.position.maxScrollExtent + 100.0,
@@ -65,44 +74,105 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(() {
+      const scrollThreshold = 50; // Change this value as needed
+      if (scrollController.offset >= scrollThreshold && !showScrollToTopButton) {
+        setState(() => showScrollToTopButton = true);
+      } else if (scrollController.offset < scrollThreshold && showScrollToTopButton) {
+        setState(() => showScrollToTopButton = false);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    controller.dispose();
+    super.dispose();
+  }
+
+
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+          onPressed: () => Navigator.of(context).pop(),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: Column(
+      body: Stack(
         children: [
-          Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.only(bottom: 160),
-              controller: scrollController,
-              itemCount: msgs.length,
-              itemBuilder: (context, index) {
-                if (index == 0) { // Check for header
-                  return buildHeader();
-                } else {
-                  // Adjust for null header in index 0
-                  Message message = msgs[index]!;
-                  return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                    child: buildMessage(message, message.sender),
-                  );
-                }
-              },
-            ),
+          Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  padding: EdgeInsets.only(bottom: 200), // Adjust for text field space
+                  controller: scrollController,
+                  itemCount: msgs.length,
+                  itemBuilder: (context, index) {
+                    if (index == 0) {
+                      return buildHeader();
+                    } else {
+                      Message message = msgs[index]!;
+                      return Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        child: buildMessage(message, message.sender),
+                      );
+                    }
+                  },
+                ),
+              ),
+              buildInputField(),
+            ],
           ),
-          buildInputField(),
+          if (showScrollToTopButton) // Conditionally display the 3D effect FAB
+            Positioned(
+              bottom: 170, // Adjusted to move the button a bit higher
+              right: 0,
+              left: 0,
+              child: Align(
+                alignment: Alignment.center,
+                child: GestureDetector(
+                  onTap: () {
+                    scrollController.animateTo(
+                      0.0,
+                      duration: Duration(seconds: 1),
+                      curve: Curves.fastOutSlowIn,
+                    );
+                  },
+                  child: Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.green[700]!, Colors.green[400]!],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.green.withOpacity(0.4),
+                          offset: Offset(4, 4),
+                          blurRadius: 10,
+                        ),
+                      ],
+                    ),
+                    child: Icon(Icons.arrow_upward, color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );
   }
+
   Widget buildHeader() {
     // Build your header widget here
     return Column(
