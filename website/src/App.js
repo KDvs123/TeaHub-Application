@@ -5,6 +5,8 @@ import Chatbot from './Chatbot';
 import TeaDescription from './TeaDescription';
 import MainHero from './MainHero';
 import NavBar from './NavBar';
+import PlantCategories from './CategoryItem';
+import Footer from './Footer';
 
 function App(){
   return(
@@ -15,6 +17,8 @@ function App(){
       <DiseaseSection/>
       <Chatbot/>
       <TeaDescription/>
+      <PlantCategories/>
+      <Footer/>
     </div>
 
  </div>
