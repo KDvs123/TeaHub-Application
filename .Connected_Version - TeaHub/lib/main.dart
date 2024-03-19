@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
     return Consumer<ThemeProvider>(builder: (context, provider, child) {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const AuthPage(),
+        home: const AuthPage(), //Scene(), //
         theme: lightMode,
         darkTheme: darkMode,
         themeMode: provider.themeMode,

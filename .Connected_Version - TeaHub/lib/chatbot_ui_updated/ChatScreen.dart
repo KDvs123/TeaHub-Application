@@ -1,5 +1,4 @@
 import 'dart:convert';
-//import 'package:chat_bubbles/bubbles/bubble_normal.dart';
 import 'package:chat_bubbles/bubbles/bubble_normal.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -15,8 +14,9 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController controller = TextEditingController();
   final ScrollController scrollController = ScrollController();
-  List<Message> msgs = [];
+  List<Message?> msgs = [null]; // Include a null at the start for the header
   bool isTyping = false;
+  bool showScrollToTopButton = false;
 
   void sendMsg() async {
     String text = controller.text.trim();
@@ -25,13 +25,20 @@ class _ChatScreenState extends State<ChatScreen> {
     }
     String apiKey =
         "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"; // Replace with your actual API key
+
+    // Add the user's message to the chat
+
     setState(() {
-      msgs.insert(0, Message(sender: true, text: text));
+      msgs.add(Message(sender: true, text: text));
+
       isTyping = true;
     });
+
+    // Clear input field and animate scroll
+
     controller.clear();
     scrollController.animateTo(
-      0.0,
+      scrollController.position.maxScrollExtent + 100.0,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeOut,
     );
@@ -57,7 +64,7 @@ class _ChatScreenState extends State<ChatScreen> {
             data["choices"][0]["message"]["content"].toString().trimLeft();
         setState(() {
           isTyping = false;
-          msgs.insert(0, Message(sender: false, text: reply));
+          msgs.add(Message(sender: false, text: reply));
         });
       } else {
         throw Exception('Failed to load data');
@@ -70,131 +77,238 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(() {
+      const scrollThreshold = 50; // Change this value as needed
+      if (scrollController.offset >= scrollThreshold &&
+          !showScrollToTopButton) {
+        setState(() => showScrollToTopButton = true);
+      } else if (scrollController.offset < scrollThreshold &&
+          showScrollToTopButton) {
+        setState(() => showScrollToTopButton = false);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        backgroundColor: Colors.white,
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back, color: Colors.black),
+        //   onPressed: () => Navigator.of(context).pop(),
+        // ),
+        // backgroundColor: Colors.white,
+        // elevation: 0,
+        backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
+        title: Row(
+          children: [
+            Expanded(
+              child: Text(
+                'ChatBot',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 30,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-      body: Column(
+      body: Stack(
         children: [
-          SizedBox(height: 16), // Padding at the top
-          IntrinsicHeight(
-            // Ensures that the row's height is governed by the tallest widget
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/teabot.png',
-                  width: 150, // Adjust the width to scale the image up
+          Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  padding: EdgeInsets.only(
+                      bottom: 200), // Adjust for text field space
+                  controller: scrollController,
+                  itemCount: msgs.length,
+                  itemBuilder: (context, index) {
+                    if (index == 0) {
+                      return buildHeader();
+                    } else {
+                      Message message = msgs[index]!;
+                      return Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        child: buildMessage(message, message.sender),
+                      );
+                    }
+                  },
                 ),
-                SizedBox(width: 25), // Spacing between the image and the text
-                Text(
-                  "Hello!\nI'm TeaBot",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 36, // Increased size for the text
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 20),
-          Expanded(
-            child: ListView.builder(
-              padding:
-                  EdgeInsets.only(bottom: 160), // Space for the input field
-              controller: scrollController,
-              itemCount: msgs.length,
-              reverse: true,
-              itemBuilder: (context, index) {
-                return Align(
-                  alignment: msgs[index].sender
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                    child: BubbleNormal(
-                      text: msgs[index].text,
-                      isSender: msgs[index].sender,
-                      color: msgs[index].sender
-                          ? Colors.blue.shade100
-                          : Colors.grey.shade200,
-                      tail: true,
-                      textStyle: TextStyle(
-                        fontSize: 16,
-                        color:
-                            msgs[index].sender ? Colors.white : Colors.black87,
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-          SizedBox(height: 20),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 150, // Adjusted height for the input field
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30),
               ),
-              color: const Color.fromRGBO(78, 203, 113, 1),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: controller,
-                      textCapitalization: TextCapitalization.sentences,
-                      decoration: InputDecoration(
-                        hintText: "Enter text",
-                        border: InputBorder.none,
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 16),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide.none,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide.none,
-                        ),
+              buildInputField(),
+            ],
+          ),
+          if (showScrollToTopButton) // Conditionally display the 3D effect FAB
+            Positioned(
+              bottom: 170, // Adjusted to move the button a bit higher
+              right: 0,
+              left: 0,
+              child: Align(
+                alignment: Alignment.center,
+                child: GestureDetector(
+                  onTap: () {
+                    scrollController.animateTo(
+                      0.0,
+                      duration: Duration(seconds: 1),
+                      curve: Curves.fastOutSlowIn,
+                    );
+                  },
+                  child: Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.green[700]!, Colors.green[400]!],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
-                      onSubmitted: (_) => sendMsg(),
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.green.withOpacity(0.4),
+                          offset: Offset(4, 4),
+                          blurRadius: 10,
+                        ),
+                      ],
                     ),
+                    child: Icon(Icons.arrow_upward, color: Colors.white),
                   ),
-                  const SizedBox(width: 8),
-                  GestureDetector(
-                    onTap: sendMsg,
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: const BoxDecoration(
-                        color: Colors.blue,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(Icons.send, color: Colors.white),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
-          ),
         ],
+      ),
+    );
+  }
+
+  Widget buildHeader() {
+    // Build your header widget here
+    return Column(
+      children: [
+        SizedBox(height: 16),
+        IntrinsicHeight(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('assets/teabot.png', width: 150),
+              SizedBox(width: 25),
+              Text(
+                "Hello!\nI'm TeaBot",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Widget buildMessage(Message message, bool isSender) {
+    // Build your message widget here
+    return Row(
+      mainAxisAlignment:
+          isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
+      children: <Widget>[
+        if (!isSender) ...[
+          Icon(Icons.chat, color: Color(0xFF4ECB81)),
+          SizedBox(width: 8),
+        ],
+        Expanded(
+          child: BubbleNormal(
+            text: message.text,
+            isSender: isSender,
+            color: isSender ? Colors.blue : Color(0xFF4ECB81),
+            tail: true,
+            textStyle: TextStyle(
+              fontSize: 16,
+              color: isSender ? Colors.white : Colors.black87,
+            ),
+          ),
+        ),
+        if (isSender) ...[
+          SizedBox(width: 8),
+          Icon(Icons.account_circle, color: Colors.blue),
+        ],
+      ],
+    );
+  }
+
+  Widget buildInputField() {
+    // Build your input field widget here
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 150,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
+        ),
+        color: const Color.fromRGBO(78, 203, 113, 1),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: controller,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: InputDecoration(
+                  hintText: "Enter text",
+                  hintStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  border: InputBorder.none,
+                  filled: true,
+                  fillColor: Theme.of(context).colorScheme.tertiary,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+                onSubmitted: (_) => sendMsg(),
+              ),
+            ),
+            const SizedBox(width: 8),
+            GestureDetector(
+              onTap: sendMsg,
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                  color: Colors.blue,
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.send, color: Colors.white),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

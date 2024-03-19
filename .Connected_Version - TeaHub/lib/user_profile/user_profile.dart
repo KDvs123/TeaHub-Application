@@ -40,6 +40,43 @@ class UserProfile extends StatelessWidget {
                     left: 0 * fem,
                     top: 0 * fem,
                     child: Align(
+                      alignment: Alignment
+                          .centerLeft, // Aligns the content to the left
+                      child: SizedBox(
+                        width: 380 * fem,
+                        height: 85 * fem,
+                        child: Container(
+                          color: Color.fromARGB(255, 78, 203,
+                              128), // Change this to the desired background color
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 15, top: 40), // Adds left padding
+
+                            child: Row(
+                              // Wrap text in Row to align properly
+                              children: [
+                                Text(
+                                  'User Profile',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                    fontSize: 30,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  Positioned(
+                    // rectangle51jgj (226:2630)
+                    left: 0 * fem,
+                    top: 80 * fem,
+                    child: Align(
                       child: SizedBox(
                         width: 380 * fem,
                         height: 263 * fem,

@@ -16,7 +16,7 @@ class SquareTile extends StatelessWidget {
       child: Container(
         //padding: EdgeInsets.all(20),
         padding: const EdgeInsets.symmetric(
-          horizontal: 25.0, // Horizontal padding
+          horizontal: 45.0, // Horizontal padding
           vertical: 10.0, // Vertical padding
         ),
         decoration: BoxDecoration(

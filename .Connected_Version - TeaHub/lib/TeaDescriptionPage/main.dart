@@ -1,4 +1,5 @@
 import 'package:TeaHub/TeaDescriptionPage/teaDetails.dart';
+import 'package:TeaHub/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -12,12 +13,30 @@ class TeaProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: lightMode, // Use light mode theme
+      darkTheme: darkMode, // Use dark mode theme
+      //themeMode: provider.themeMode,
       home: Scaffold(
         // Backgroung color for light/dark mode
         backgroundColor: Theme.of(context).colorScheme.background,
-        // appBar: AppBar(
-        //   title: Text('GridView Example'),
-        // ),
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          title: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'Tea Descriptions',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                    fontSize: 30,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
         body: FutureBuilder(
           future: fetchData(),
           builder: (BuildContext context, AsyncSnapshot<List<Tea>> snapshot) {
@@ -139,8 +158,8 @@ class Frame1Widget extends StatelessWidget {
               blurRadius: 52,
             ),
           ],
-          color: Colors.white,
-          //color: Theme.of(context).colorScheme.primary,
+          //color: Colors.grey.shade400,
+          color: Theme.of(context).colorScheme.surfaceTint,
         ),
         child: Stack(
           children: <Widget>[
@@ -151,7 +170,8 @@ class Frame1Widget extends StatelessWidget {
                 tea.name,
                 textAlign: TextAlign.left,
                 style: TextStyle(
-                  color: Color.fromRGBO(48, 64, 34, 1),
+                  //color: Color.fromRGBO(48, 64, 34, 1),
+                  color: Theme.of(context).colorScheme.primary,
                   fontFamily: 'Lexend',
                   fontSize: 13,
                   fontWeight: FontWeight.normal,
@@ -220,6 +240,7 @@ class Frame1Widget extends StatelessWidget {
                 },
                 child: Icon(
                   Icons.arrow_forward,
+                  color: Colors.black,
                 ),
               ),
             ),

@@ -6,11 +6,7 @@ import 'package:TeaHub/services/authentication_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-// import 'package:teahub/components/login_button.dart';
-// import 'package:teahub/components/my_textfield.dart';
-// import 'package:teahub/components/square_tile.dart';
-// import 'package:teahub/pages/splash_screens.dart';
-// import 'package:teahub/services/authentication_service.dart';
+
 import 'package:flutter/cupertino.dart';
 
 class LoginPage extends StatefulWidget {
@@ -329,16 +325,16 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: () => AuthService().signInWithFacebook(context),
                       imagePath: 'lib/images/Facebook_icon.png',
                     ),
-                    const SizedBox(width: 15),
+                    const SizedBox(width: 30),
                     SquareTile(
                       onTap: () => AuthService().signInWithGoogle(),
                       imagePath: 'lib/images/Google_icon.png',
                     ),
-                    const SizedBox(width: 15),
-                    SquareTile(
-                      onTap: () => {},
-                      imagePath: 'lib/images/Apple_icon.png',
-                    ),
+                    // const SizedBox(width: 15),
+                    // SquareTile(
+                    //   onTap: () => {},
+                    //   imagePath: 'lib/images/Apple_icon.png',
+                    // ),
                   ],
                 ),
 

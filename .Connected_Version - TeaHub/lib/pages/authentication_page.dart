@@ -28,10 +28,10 @@ class AuthPage extends StatelessWidget {
             return VerificationPage();
           } else {
             // Display splash screens
-            //return splashScreens();
+            return splashScreens();
 
             // Display login or sign in page
-            return LoginOrRegisterPage();
+            //return LoginOrRegisterPage();
           }
         },
       ),

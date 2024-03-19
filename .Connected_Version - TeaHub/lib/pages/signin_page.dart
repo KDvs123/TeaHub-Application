@@ -2,13 +2,9 @@ import 'package:TeaHub/components/my_textfield.dart';
 import 'package:TeaHub/components/signin_button.dart';
 import 'package:TeaHub/components/square_tile.dart';
 import 'package:TeaHub/services/authentication_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:teahub/components/signin_button.dart';
-//import 'package:teahub/components/square_tile.dart';
 import 'package:flutter/material.dart';
-//import 'package:teahub/components/my_textfield.dart';
-//import 'package:teahub/pages/login_page.dart';
-//import 'package:teahub/services/authentication_service.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
@@ -20,6 +16,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   //text editing controllers
+  final userNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmpasswordController = TextEditingController();
@@ -43,6 +40,9 @@ class _RegisterPageState extends State<RegisterPage> {
           email: emailController.text,
           password: passwordController.text,
         );
+
+        addUserDetails(userNameController.text.trim());
+
         Navigator.pop(context);
       } else {
         //showErrorMessage("error");
@@ -69,6 +69,12 @@ class _RegisterPageState extends State<RegisterPage> {
         EmailInErrorMessage();
       }
     }
+  }
+
+  Future addUserDetails(String userName) async {
+    await FirebaseFirestore.instance.collection('Users').add({
+      'user name': userName,
+    });
   }
 
   //error message to user
@@ -362,7 +368,17 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
 
-              const SizedBox(height: 25),
+              const SizedBox(height: 15),
+              // email textfield
+              MyTextField(
+                controller: userNameController,
+                hintText: 'User Name',
+                obscureText: false,
+              ),
+
+              const SizedBox(
+                height: 10,
+              ),
 
               // email textfield
               MyTextField(
@@ -394,7 +410,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
 
               const SizedBox(
-                height: 25,
+                height: 20,
               ),
 
               // sign in button
@@ -403,7 +419,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 onTap: signUserUp,
               ), //MyButton
 
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
 
               // or continue with
               Padding(
@@ -422,7 +438,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: Text(
                         'Or Register with',
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                     ),
@@ -436,7 +452,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
 
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
 
               // google and facebook button
               Row(
@@ -446,20 +462,20 @@ class _RegisterPageState extends State<RegisterPage> {
                     onTap: () => AuthService().signInWithFacebook(context),
                     imagePath: 'lib/images/Facebook_icon.png',
                   ),
-                  const SizedBox(width: 15),
+                  const SizedBox(width: 30),
                   SquareTile(
                     onTap: () => AuthService().signInWithGoogle(),
                     imagePath: 'lib/images/Google_icon.png',
                   ),
-                  const SizedBox(width: 15),
-                  SquareTile(
-                    onTap: () => {},
-                    imagePath: 'lib/images/Apple_icon.png',
-                  ),
+                  // const SizedBox(width: 15),
+                  // SquareTile(
+                  //   onTap: () => {},
+                  //   imagePath: 'lib/images/Apple_icon.png',
+                  // ),
                 ],
               ),
 
-              const SizedBox(height: 40),
+              const SizedBox(height: 30),
 
               // not a member? register now
               Row(
@@ -468,7 +484,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   Text(
                     'Already have an account?',
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   const SizedBox(width: 4),
@@ -482,6 +498,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 30),
                 ],
               )
             ],

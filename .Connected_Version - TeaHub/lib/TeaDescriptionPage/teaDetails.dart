@@ -1,4 +1,5 @@
 import 'package:TeaHub/TeaDescriptionPage/main.dart';
+import 'package:TeaHub/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,6 +15,8 @@ class TeaDetailsApp extends StatelessWidget {
       //   primarySwatch: Colors.grey,
       // ),
       home: TeaDetailsPage(),
+      theme: lightMode, // Use light mode theme
+      darkTheme: darkMode, // Use dark mode theme
     );
   }
 }
@@ -27,7 +30,11 @@ class TeaDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
-        title: Text('Tea Details'),
+        title: Text(
+          'Tea Details',
+          style: TextStyle(
+              color: Theme.of(context).colorScheme.primary, fontSize: 30),
+        ),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -106,6 +113,7 @@ class TeaDetailsWidget extends StatelessWidget {
                       bottomLeft: Radius.circular(
                           MediaQuery.of(context).size.height * 0.25),
                     ),
+
                     image: DecorationImage(
                       image: NetworkImage(tea.imageUrl),
                       fit: BoxFit.cover,
@@ -139,7 +147,8 @@ class TeaDetailsWidget extends StatelessWidget {
                       fontSize:
                           20, // Set the font size of the first letter to 20
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      //color: Colors.black,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   TextSpan(
@@ -147,7 +156,8 @@ class TeaDetailsWidget extends StatelessWidget {
                     style: TextStyle(
                       fontSize:
                           18, // Set the font size of the rest of the label to 18
-                      color: Colors.black,
+                      //color: Colors.black,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ],
@@ -179,7 +189,8 @@ class TeaDetailsWidget extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20, // Set the font size of the first letter to 20
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    //color: Colors.black,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
                 TextSpan(
@@ -187,7 +198,8 @@ class TeaDetailsWidget extends StatelessWidget {
                   style: TextStyle(
                     fontSize:
                         18, // Set the font size of the rest of the label to 18
-                    color: Colors.black,
+                    //color: Colors.black,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ],
