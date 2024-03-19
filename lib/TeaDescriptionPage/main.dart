@@ -87,17 +87,23 @@ class Tea {
     });
 
   factory Tea.fromJson(Map<String, dynamic> json) {
+    // A helper function to get value or return a default
+    String getOrDefault(String key, String defaultValue) {
+      var value = json[key];
+      return (value == null || value.isEmpty) ? defaultValue : value;
+    }
+
     return Tea(
-      name: json['name'] ?? '', 
-      imageUrl: json['image'] ?? '', 
-      alternativeName: json['altnames'] ?? 'None', 
-      origin: json['origin'] ?? '', 
-      type: json['type'] ?? '',
-      caffeine: json['caffeine'] ?? '', 
-      caffeineLevel: json['caffeineLevel'] ?? '', 
-      description: json['description'] ?? 'None', 
-      colourDescription: json['colorDescription'] ?? '', 
-      mainIngredients: json['tasteDescription'] ?? '', 
+      name: getOrDefault('name', 'None'),
+      imageUrl: getOrDefault('image', '.noimage.webp'),
+      alternativeName: getOrDefault('altnames', 'None'),
+      origin: getOrDefault('origin', 'None'),
+      type: getOrDefault('type', 'None'),
+      caffeine: getOrDefault('caffeine', 'None'),
+      caffeineLevel: getOrDefault('caffeineLevel', 'None'),
+      description: getOrDefault('description', 'None'),
+      colourDescription: getOrDefault('colorDescription', 'None'),
+      mainIngredients: getOrDefault('tasteDescription', 'None'),
     );
   }
 }

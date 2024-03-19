@@ -114,53 +114,8 @@ class TeaDetailsWidget extends StatelessWidget {
   }
 
   Widget _buildInfoTag(BuildContext context, String title, String content) {
-    if (
-    title == 'Origin:' ||
-        title == 'Type:' ||
-        title == 'Caffeine:' ||
-        title == 'Caffeine Level:') {
-      return Padding(
-        padding: const EdgeInsets.only(right: 8,bottom: 20), // Add padding to the right side
-        child: Row(
-          children: [
-            RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: title[0],
-                    style: TextStyle(
-                      fontSize: 20, // Set the font size of the first letter to 20
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  TextSpan(
-                    text: title.substring(1),
-                    style: TextStyle(
-                      fontSize: 18, // Set the font size of the rest of the label to 18
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(width: 8),
-            Text(
-              content,
-              style: TextStyle(
-                fontSize: 18,
-                color: Color(0xFF4ECB81),
-                fontWeight: FontWeight.bold,
-                height: 1.5, // Line spacing
-              ),
-            ),
-            SizedBox(height: 10),
-          ],
-        ),
-      );
-    } else {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           RichText(
             text: TextSpan(
