@@ -12,41 +12,105 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('GridView Example'),
-        ),
-        body: FutureBuilder(
-          future: fetchData(),
-          builder: (BuildContext context, AsyncSnapshot<List<Tea>> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text('Error: ${snapshot.error}'),
-              );
-            } else {
-              // Filter out teas without an image attribute
-              final teasWithImage = snapshot.data!.where((tea) => tea.imageUrl.isNotEmpty).toList();
-              return GridView.builder(
-                itemCount: teasWithImage.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // 2 columns
-                  mainAxisSpacing: 10.0, // spacing between rows
-                  crossAxisSpacing: 10.0, // spacing between columns
-                  childAspectRatio: 160 / 242, // aspect ratio of each item
+        body: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: Image.asset('assets/teaPage/hamburger_menu.png'),
+                      onPressed: () {
+                        // Handle menu button press
+                      },
+                    ),
+                    Spacer(), // This will create space between the elements
+                    IconButton(
+                      icon: Image.asset('assets/teaPage/notification_icon.png'),
+                      onPressed: () {
+                        // Handle notifications button press
+                      },
+                    ),
+                  ],
                 ),
-                itemBuilder: (BuildContext context, int index) {
-                  return Frame1Widget(tea: teasWithImage[index]);
-                },
-              );
-            }
-          },
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 30.0,top:8.0), // Adjust the padding as needed
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
+                  children: [
+                    Text(
+                      "Let's find your",
+                      style: TextStyle(
+                        color: Color(0xFF4ecb81), // The specified green color
+                        fontWeight: FontWeight.w900,
+                        fontSize: 36, // Increased font size
+                      ),
+                    ),
+                    Text(
+                      "plants",
+                      style: TextStyle(
+                        color: Color(0xFF4ecb81), // The specified green color
+                        fontWeight: FontWeight.w900,
+                        fontSize: 36, // Same font size for uniformity
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 24), // Spacing between title and search bar
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search',
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(24),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Colors.greenAccent.shade100,
+                  ),
+                ),
+              ),
+              SizedBox(height:16),
+              Expanded(
+                child: FutureBuilder(
+                  future: fetchData(), // Replace with your data fetching logic
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else {
+                      // Assuming snapshot.data is the list of items you want to display
+                      return GridView.builder(
+                        itemCount: snapshot.data.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 10.0,
+                          crossAxisSpacing: 10.0,
+                          childAspectRatio: 160 / 242,
+                        ),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Frame1Widget(tea: snapshot.data[index]);
+                        },
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
+
 
   Future<List<Tea>> fetchData() async {
     final response = await http.get(Uri.parse('https://boonakitea.cyclic.app/api/all'));
