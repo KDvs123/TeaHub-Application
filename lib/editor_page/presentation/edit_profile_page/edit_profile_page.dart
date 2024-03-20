@@ -74,19 +74,22 @@ class EditProfilePage extends StatelessWidget {
               onTapArrowLeft(context);
             }),
         title: AppbarTitle(
-            text: "Edit profile", margin: EdgeInsets.only(left: 90.h)));
+            text: "Edit profile", 
+            margin: EdgeInsets.only(left: 90.h)));
   }
 
   /// Section Widget
   Widget _buildFullName(BuildContext context) {
     return CustomTextFormField(
-        controller: fullNameController, hintText: "Full name");
+        controller: fullNameController, 
+        hintText: "Full name");
   }
 
   /// Section Widget
   Widget _buildName(BuildContext context) {
     return CustomTextFormField(
-        controller: nameController, hintText: "Nick name");
+        controller: nameController, 
+        hintText: "Nick name");
   }
 
   /// Section Widget
