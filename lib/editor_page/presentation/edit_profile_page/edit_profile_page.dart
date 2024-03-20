@@ -20,8 +20,6 @@ class EditProfilePage extends StatelessWidget {
 
   TextEditingController phoneNumberController = TextEditingController();
 
-  List<String> dropdownItemList = ["Item One", "Item Two", "Item Three"];
-
   TextEditingController bigOutlineDefaultController = TextEditingController();
 
   TextEditingController addressController = TextEditingController();
