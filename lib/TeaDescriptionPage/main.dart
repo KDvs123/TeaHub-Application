@@ -7,17 +7,74 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget{
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  TextEditingController searchController = TextEditingController();
+  late List<Tea> allTeas; // List to hold all teas.
+  late List<Tea> filteredTeas; // List to hold teas after a search is performed.
+
+  @override
+  void initState() {
+    super.initState();
+    allTeas = []; // Initialize to an empty list.
+    filteredTeas = []; // Initialize to an empty list.
+    fetchData(); // Fetch your tea data from the API.
+    searchController.addListener(() {
+      filterSearchResults(searchController.text);
+    });
+  }
+
+   @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
+  Future<List<Tea>> fetchData() async {
+    final response = await http.get(
+        Uri.parse('https://boonakitea.cyclic.app/api/all'));
+    if (response.statusCode == 200) {
+      final List jsonData = json.decode(response.body);
+      List<Tea> teas = jsonData.map((json) => Tea.fromJson(json)).toList();
+      return teas;
+    } else {
+      
+      throw Exception('Failed to load tea data');
+    }
+  }
+
+  void filterSearchResults(String query) {
+    List<Tea> dummySearchList = [];
+    if (query.isNotEmpty) {
+      dummySearchList.addAll(allTeas);
+      dummySearchList = dummySearchList.where((item) {
+        return item.name.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    } else {
+      dummySearchList = List.from(allTeas);
+    }
+    setState(() {
+      filteredTeas = dummySearchList;
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: SafeArea(
-          child: Column(
+        body: Column(
+          
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: EdgeInsets.only(top:35.0,left: 20.0,right: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -75,21 +132,38 @@ class MyApp extends StatelessWidget {
                     filled: true,
                     fillColor: Colors.greenAccent.shade100,
                   ),
+                  onChanged: (value) {
+                  filterSearchResults(value);
+                },
                 ),
               ),
               SizedBox(height:16),
               Expanded(
-                child: FutureBuilder(
+                child: searchController.text.isNotEmpty
+                ? GridView.builder(
+              itemCount: filteredTeas.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10.0,
+                crossAxisSpacing: 10.0,
+                childAspectRatio: 160 / 242,
+              ),
+              itemBuilder: (BuildContext context, int index) {
+                return Frame1Widget(tea: filteredTeas[index]);
+              },
+            )
+            : FutureBuilder<List<Tea>>(
                   future: fetchData(), // Replace with your data fetching logic
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  builder: (BuildContext context, AsyncSnapshot<List<Tea>> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(child: CircularProgressIndicator());
                     } else if (snapshot.hasError) {
                       return Center(child: Text('Error: ${snapshot.error}'));
-                    } else {
-                      // Assuming snapshot.data is the list of items you want to display
+                    } else if (snapshot.hasData) {
+                      allTeas = snapshot.data!;
+                      filteredTeas = allTeas;
                       return GridView.builder(
-                        itemCount: snapshot.data.length,
+                        itemCount: filteredTeas.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           mainAxisSpacing: 10.0,
@@ -97,31 +171,24 @@ class MyApp extends StatelessWidget {
                           childAspectRatio: 160 / 242,
                         ),
                         itemBuilder: (BuildContext context, int index) {
-                          return Frame1Widget(tea: snapshot.data[index]);
+                          return Frame1Widget(tea: filteredTeas[index]);
                         },
                       );
-                    }
+                    }else {
+                    return Center(child: Text("No data found"));
+                      }
                   },
                 ),
               ),
             ],
-          ),
+          
         ),
       ),
     );
   }
 
 
-  Future<List<Tea>> fetchData() async {
-    final response = await http.get(Uri.parse('https://boonakitea.cyclic.app/api/all'));
-    if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body) as List<dynamic>;
-      List<Tea> teas = jsonData.map((e) => Tea.fromJson(e)).toList();
-      return teas;
-    } else {
-      throw Exception('Failed to load data');
-    }
-  }
+  
 }
 
 
