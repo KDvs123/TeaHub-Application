@@ -122,10 +122,34 @@ class EditProfilePage extends StatelessWidget {
         textInputAction: TextInputAction.done);
   }
 
-  /// Section Widget
   Widget _buildSubmit(BuildContext context) {
-    return CustomElevatedButton(text: "submit".toUpperCase());
-  }
+  return CustomElevatedButton(
+    text: "submit".toUpperCase(),
+    onPressed: () async {
+      // Update user profile data here
+      String fullName = fullNameController.text;
+      String email = emailController.text;
+
+      // You can use Firebase Firestore or any other database to update the user data
+      // For example, using Firebase Firestore:
+      try {
+        // Assuming you have a Firestore collection called 'users'
+        await FirebaseFirestore.instance.collection('users').doc(userId).update({
+          'fullName': fullName,
+          'email': email,
+          // Add other fields as needed
+        });
+        
+        // Notifying the main interface that the profile has been updated
+        Navigator.pop(context, true); // Passing true to indicate profile updated
+      } catch (error) {
+        // Handle error updating profile
+        print('Error updating profile: $error');
+        // Optionally, you can show a snackbar or dialog to inform the user about the error
+      }
+    },
+  );
+}
 
   /// Navigates back to the previous screen.
   onTapArrowLeft(BuildContext context) {
