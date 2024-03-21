@@ -59,7 +59,7 @@ dependencies:
   geolocator: ^10.1.0
   geocoding: ^2.1.1
   lottie: ^3.0.0
-  intl: ^0.17.0 
+  intl: 0.19.0 
 
   #scan page
   image_cropper: ^5.0.1
@@ -74,6 +74,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo/TeaHub_icon.jpg"
   
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -139,29 +145,29 @@ assets:
   - assets/user_profile/images/scansvgrepocom-N6T.png
 
   #assets of main interface
-    - assets/page-1/images/setting.png
-    - assets/page-1/images/stylelinear.png
-    - assets/page-1/images/vector.png
-    - assets/page-1/images/book-albumsvgrepocom.png
-    - assets/page-1/images/scansvgrepocom.png
-    - assets/page-1/images/vector-AHS.png
-    - assets/page-1/images/auto-group-ucn8.png
-    - assets/page-1/images/vector-8vg.png
-    - assets/page-1/images/assistant.png
-    - assets/page-1/images/vector-ax4.png
-    - assets/page-1/images/peperomia-obtusfolia.png
+  - assets/page-1/images/setting.png
+  - assets/page-1/images/stylelinear.png
+  - assets/page-1/images/vector.png
+  - assets/page-1/images/book-albumsvgrepocom.png
+  - assets/page-1/images/scansvgrepocom.png
+  - assets/page-1/images/vector-AHS.png
+  - assets/page-1/images/auto-group-ucn8.png
+  - assets/page-1/images/vector-8vg.png
+  - assets/page-1/images/assistant.png
+  - assets/page-1/images/vector-ax4.png
+  - assets/page-1/images/peperomia-obtusfolia.png
 
     #splash screen
-    - assets/splashscreen/Animation.json
-    - assets/splashscreen/loader.json
+  - assets/splashscreen/Animation.json
+  - assets/splashscreen/loader.json
 
     #edit profile page
-    - assets/editProfileImages
+  - assets/editProfileImages
 
     #introsplash
-    - assets/introsplash/tree.png
-    - assets/introsplash/chatbot.png
-    - assets/introsplash/teaprofile.png
+  - assets/introsplash/tree.png
+  - assets/introsplash/chatbot.png
+  - assets/introsplash/teaprofile.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
