@@ -17,6 +17,7 @@ class _ChatScreenState extends State<ChatScreen> {
   List<Message?> msgs = [null];// Include a null at the start for the header
   bool isTyping = false;
   bool showScrollToTopButton = false;
+  List<String> teaQuestions = [];
 
 
   void sendMsg() async {
@@ -24,6 +25,23 @@ class _ChatScreenState extends State<ChatScreen> {
     if (text.isEmpty) {
       return;
     }
+
+    controller.clear();
+
+    setState(() {
+      msgs.add(Message(sender: true, text: text)); 
+
+      isTyping = true;
+    });
+
+
+    if (!checkIfTeaRelated(text)) {
+      setState(() {
+        msgs.add(Message(sender: false, text: "I'm only specializing in tea. Please ask something related to tea."));
+      });
+      return;
+    }
+
     String apiKey = "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"; // Replace with your actual API key
     
     // Add the user's message to the chat
@@ -36,7 +54,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
     // Clear input field and animate scroll
 
-    controller.clear();
+    
     scrollController.animateTo(
       scrollController.position.maxScrollExtent + 100.0,
       duration: const Duration(milliseconds: 300),
@@ -76,6 +94,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
+    loadTeaQuestions();
     scrollController.addListener(() {
       const scrollThreshold = 50; // Change this value as needed
       if (scrollController.offset >= scrollThreshold && !showScrollToTopButton) {
@@ -92,6 +111,51 @@ class _ChatScreenState extends State<ChatScreen> {
     controller.dispose();
     super.dispose();
   }
+
+  void loadTeaQuestions() async {
+    final rawData = await rootBundle.loadString('assets/Teahub.csv');
+    List<List<dynamic>> csvTable = const CsvToListConverter().convert(rawData);
+    setState(() {
+      teaQuestions = csvTable.map((row) => row[0].toString().toLowerCase().trim()).toList();
+    });
+  }
+
+  bool checkIfTeaRelated(String text) {
+    // Normalize text for comparison
+    String normalizedText = text.toLowerCase().trim();
+
+    // Keywords related to tea cultivation, diseases, and treatment plans
+    List<String> teaKeywords = [
+      'tea',
+      'blister blight',
+      'cultivation',
+      'fertilization',
+      'pruning',
+      'harvesting',
+      'withering',
+      'oxidation',
+      'fermentation',
+      'drying',
+      'steaming',
+      'rolling',
+      'pests',
+      'fungal',
+      'disease',
+      'treatment',
+      // Add more relevant keywords as needed
+    ];
+
+    // Add normalized questions from CSV to the keywords list for a comprehensive check
+    List<String> allTeaRelatedWords = List.from(teaKeywords)
+      ..addAll(teaQuestions.map((q) => q.toLowerCase().trim()).toList());
+
+    // Check if normalized text contains any of the tea-related words or vice versa
+    return allTeaRelatedWords.any((word) =>
+    normalizedText.contains(word) || word.contains(normalizedText));
+  }
+
+
+
 
 
  @override
@@ -202,6 +266,8 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget buildMessage(Message message, bool isSender) {
+    bool isSpecialMessage = message.text == "I'm only specializing in tea. Please ask something related to tea.";
+
     // Build your message widget here
     return Row(
       mainAxisAlignment: isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
@@ -214,7 +280,7 @@ class _ChatScreenState extends State<ChatScreen> {
           child: BubbleNormal(
             text: message.text,
             isSender: isSender,
-            color: isSender ? Colors.blue : Color(0xFF4ECB81),
+            color: isSender ? Colors.blue : (isSpecialMessage ? Colors.red : Color(0xFF4ECB81)),
             tail: true,
             textStyle: TextStyle(
               fontSize: 16,
