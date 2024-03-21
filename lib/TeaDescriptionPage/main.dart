@@ -36,16 +36,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<List<Tea>> fetchData() async {
-    final response = await http.get(
-        Uri.parse('https://boonakitea.cyclic.app/api/all'));
-    if (response.statusCode == 200) {
-      final List jsonData = json.decode(response.body);
-      List<Tea> teas = jsonData.map((json) => Tea.fromJson(json)).toList();
-      return teas;
-    } else {
-      
-      throw Exception('Failed to load tea data');
-    }
+    final String response = await rootBundle.loadString('images/tea.json');
+    final List jsonData = json.decode(response) as List;
+    List<Tea> teas = jsonData.map((json) => Tea.fromJson(json)).toList();
+    return teas;
   }
 
   void filterSearchResults(String query) {
