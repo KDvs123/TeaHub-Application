@@ -1,90 +1,207 @@
 import 'package:TeaHub/TeaDescriptionPage/teaDetails.dart';
 import 'package:TeaHub/theme/theme.dart';
+import 'package:TeaHub/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:provider/provider.dart';
+
 // void main() {
-//   runApp(MyApp());
+//   runApp(TeaProfile());
 // }
 
-class TeaProfile extends StatelessWidget {
+class TeaProfile extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: lightMode, // Use light mode theme
-      darkTheme: darkMode, // Use dark mode theme
-      //themeMode: provider.themeMode,
-      home: Scaffold(
-        // Backgroung color for light/dark mode
-        backgroundColor: Theme.of(context).colorScheme.background,
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.background,
-          title: Row(
-            children: [
-              Expanded(
-                child: Text(
-                  'Tea Descriptions',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
-                    fontSize: 30,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        body: FutureBuilder(
-          future: fetchData(),
-          builder: (BuildContext context, AsyncSnapshot<List<Tea>> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                      Color.fromARGB(255, 78, 203, 128)),
-                ),
-              );
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text('Error: ${snapshot.error}'),
-              );
-            } else {
-              // Filter out teas without an image attribute
-              final teasWithImage = snapshot.data!
-                  .where((tea) => tea.imageUrl.isNotEmpty)
-                  .toList();
-              return GridView.builder(
-                itemCount: teasWithImage.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // 2 columns
-                  mainAxisSpacing: 10.0, // spacing between rows
-                  crossAxisSpacing: 10.0, // spacing between columns
-                  childAspectRatio: 160 / 242, // aspect ratio of each item
-                ),
-                itemBuilder: (BuildContext context, int index) {
-                  return Frame1Widget(tea: teasWithImage[index]);
-                },
-              );
-            }
-          },
-        ),
-      ),
-    );
+  _TeaProfileState createState() => _TeaProfileState();
+}
+
+class _TeaProfileState extends State<TeaProfile> {
+  TextEditingController searchController = TextEditingController();
+  late List<Tea> allTeas; // List to hold all teas.
+  late List<Tea> filteredTeas; // List to hold teas after a search is performed.
+
+  @override
+  void initState() {
+    super.initState();
+    allTeas = []; // Initialize to an empty list.
+    filteredTeas = []; // Initialize to an empty list.
+    fetchData(); // Fetch your tea data from the API.
+    searchController.addListener(() {
+      filterSearchResults(searchController.text);
+    });
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
   }
 
   Future<List<Tea>> fetchData() async {
     final response =
         await http.get(Uri.parse('https://boonakitea.cyclic.app/api/all'));
     if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body) as List<dynamic>;
-      List<Tea> teas = jsonData.map((e) => Tea.fromJson(e)).toList();
+      final List jsonData = json.decode(response.body);
+      List<Tea> teas = jsonData.map((json) => Tea.fromJson(json)).toList();
       return teas;
     } else {
-      throw Exception('Failed to load data');
+      throw Exception('Failed to load tea data');
     }
+  }
+
+  void filterSearchResults(String query) {
+    List<Tea> dummySearchList = [];
+    if (query.isNotEmpty) {
+      dummySearchList.addAll(allTeas);
+      dummySearchList = dummySearchList.where((item) {
+        return item.name.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    } else {
+      dummySearchList = List.from(allTeas);
+    }
+    setState(() {
+      filteredTeas = dummySearchList;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<ThemeProvider>(builder: (context, provider, child) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: lightMode, // Use light mode theme
+        darkTheme: darkMode, // Use dark mode theme
+        themeMode: provider.themeMode,
+
+        home: Scaffold(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: Image.asset('assets/teaPage/hamburger_menu.png'),
+                      onPressed: () {
+                        // Handle menu button press
+                      },
+                    ),
+                    Spacer(), // This will create space between the elements
+                    IconButton(
+                      icon: Image.asset('assets/teaPage/notification_icon.png'),
+                      onPressed: () {
+                        // Handle notifications button press
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: 30.0, top: 8.0), // Adjust the padding as needed
+                child: Column(
+                  crossAxisAlignment:
+                      CrossAxisAlignment.start, // Align text to the left
+                  children: [
+                    Text(
+                      "Let's find your",
+                      style: TextStyle(
+                        color: Color(0xFF4ecb81), // The specified green color
+                        fontWeight: FontWeight.w900,
+                        fontSize: 36, // Increased font size
+                      ),
+                    ),
+                    Text(
+                      "plants",
+                      style: TextStyle(
+                        color: Color(0xFF4ecb81), // The specified green color
+                        fontWeight: FontWeight.w900,
+                        fontSize: 36, // Same font size for uniformity
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 24), // Spacing between title and search bar
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search',
+                    hintStyle: TextStyle(color: Colors.black),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.black,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(24),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Colors.greenAccent.shade100,
+                  ),
+                  onChanged: (value) {
+                    filterSearchResults(value);
+                  },
+                ),
+              ),
+              SizedBox(height: 16),
+              Expanded(
+                child: searchController.text.isNotEmpty
+                    ? GridView.builder(
+                        itemCount: filteredTeas.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 10.0,
+                          crossAxisSpacing: 10.0,
+                          childAspectRatio: 160 / 242,
+                        ),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Frame1Widget(tea: filteredTeas[index]);
+                        },
+                      )
+                    : FutureBuilder<List<Tea>>(
+                        future:
+                            fetchData(), // Replace with your data fetching logic
+                        builder: (BuildContext context,
+                            AsyncSnapshot<List<Tea>> snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(child: CircularProgressIndicator());
+                          } else if (snapshot.hasError) {
+                            return Center(
+                                child: Text('Error: ${snapshot.error}'));
+                          } else if (snapshot.hasData) {
+                            allTeas = snapshot.data!;
+                            filteredTeas = allTeas;
+                            return GridView.builder(
+                              itemCount: filteredTeas.length,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 10.0,
+                                crossAxisSpacing: 10.0,
+                                childAspectRatio: 160 / 242,
+                              ),
+                              itemBuilder: (BuildContext context, int index) {
+                                return Frame1Widget(tea: filteredTeas[index]);
+                              },
+                            );
+                          } else {
+                            return Center(child: Text("No data found"));
+                          }
+                        },
+                      ),
+              ),
+            ],
+          ),
+        ),
+      );
+    });
   }
 }
 
@@ -113,17 +230,23 @@ class Tea {
       required this.colourDescription});
 
   factory Tea.fromJson(Map<String, dynamic> json) {
+    // A helper function to get value or return a default
+    String getOrDefault(String key, String defaultValue) {
+      var value = json[key];
+      return (value == null || value.isEmpty) ? defaultValue : value;
+    }
+
     return Tea(
-      name: json['name'] ?? '',
-      imageUrl: json['image'] ?? '',
-      alternativeName: json['altnames'] ?? 'None',
-      origin: json['origin'] ?? '',
-      type: json['type'] ?? '',
-      caffeine: json['caffeine'] ?? '',
-      caffeineLevel: json['caffeineLevel'] ?? '',
-      description: json['description'] ?? 'None',
-      colourDescription: json['colorDescription'] ?? '',
-      mainIngredients: json['tasteDescription'] ?? '',
+      name: getOrDefault('name', 'None'),
+      imageUrl: getOrDefault('image', '.noimage.webp'),
+      alternativeName: getOrDefault('altnames', 'None'),
+      origin: getOrDefault('origin', 'None'),
+      type: getOrDefault('type', 'None'),
+      caffeine: getOrDefault('caffeine', 'None'),
+      caffeineLevel: getOrDefault('caffeineLevel', 'None'),
+      description: getOrDefault('description', 'None'),
+      colourDescription: getOrDefault('colorDescription', 'None'),
+      mainIngredients: getOrDefault('tasteDescription', 'None'),
     );
   }
 }
@@ -158,14 +281,13 @@ class Frame1Widget extends StatelessWidget {
               blurRadius: 52,
             ),
           ],
-          //color: Colors.grey.shade400,
           color: Theme.of(context).colorScheme.surfaceTint,
         ),
         child: Stack(
           children: <Widget>[
             Positioned(
               top: 220,
-              left: 15,
+              left: 25,
               child: Text(
                 tea.name,
                 textAlign: TextAlign.left,
@@ -240,7 +362,7 @@ class Frame1Widget extends StatelessWidget {
                 },
                 child: Icon(
                   Icons.arrow_forward,
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),

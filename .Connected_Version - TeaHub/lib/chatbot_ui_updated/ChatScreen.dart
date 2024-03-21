@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:TeaHub/introduction_page/chatbotui_splash.dart';
 import 'package:chat_bubbles/bubbles/bubble_normal.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -89,6 +90,15 @@ class _ChatScreenState extends State<ChatScreen> {
         setState(() => showScrollToTopButton = false);
       }
     });
+
+    // // Navigating to the Chat ui page automatically when this page is opened
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   Navigator.of(context).push(
+    //     MaterialPageRoute(
+    //       builder: (context) => ChatbotUI(),
+    //     ),
+    //   );
+    // });
   }
 
   @override

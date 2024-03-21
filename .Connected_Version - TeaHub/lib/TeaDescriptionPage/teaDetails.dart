@@ -11,9 +11,7 @@ class TeaDetailsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Tea Details',
-      // theme: ThemeData(
-      //   primarySwatch: Colors.grey,
-      // ),
+
       home: TeaDetailsPage(),
       theme: lightMode, // Use light mode theme
       darkTheme: darkMode, // Use dark mode theme
@@ -29,11 +27,10 @@ class TeaDetailsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
         title: Text(
           'Tea Details',
           style: TextStyle(
-              color: Theme.of(context).colorScheme.primary, fontSize: 30),
+              fontSize: 30, color: Theme.of(context).colorScheme.primary),
         ),
       ),
       body: SingleChildScrollView(
@@ -113,7 +110,6 @@ class TeaDetailsWidget extends StatelessWidget {
                       bottomLeft: Radius.circular(
                           MediaQuery.of(context).size.height * 0.25),
                     ),
-
                     image: DecorationImage(
                       image: NetworkImage(tea.imageUrl),
                       fit: BoxFit.cover,
@@ -129,95 +125,43 @@ class TeaDetailsWidget extends StatelessWidget {
   }
 
   Widget _buildInfoTag(BuildContext context, String title, String content) {
-    if (title == 'Origin:' ||
-        title == 'Type:' ||
-        title == 'Caffeine:' ||
-        title == 'Caffeine Level:') {
-      return Padding(
-        padding: const EdgeInsets.only(
-            right: 8, bottom: 20), // Add padding to the right side
-        child: Row(
-          children: [
-            RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: title[0],
-                    style: TextStyle(
-                      fontSize:
-                          20, // Set the font size of the first letter to 20
-                      fontWeight: FontWeight.bold,
-                      //color: Colors.black,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                  TextSpan(
-                    text: title.substring(1),
-                    style: TextStyle(
-                      fontSize:
-                          18, // Set the font size of the rest of the label to 18
-                      //color: Colors.black,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: title[0],
+                style: TextStyle(
+                  fontSize: 20, // Set the font size of the first letter to 20
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
-            ),
-            SizedBox(width: 8),
-            Text(
-              content,
-              style: TextStyle(
-                fontSize: 18,
-                color: Color(0xFF4ECB81),
-                fontWeight: FontWeight.bold,
-                height: 1.5, // Line spacing
+              TextSpan(
+                text: title.substring(1),
+                style: TextStyle(
+                  fontSize:
+                      18, // Set the font size of the rest of the label to 18
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
-            ),
-            SizedBox(height: 10),
-          ],
+            ],
+          ),
         ),
-      );
-    } else {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: title[0],
-                  style: TextStyle(
-                    fontSize: 20, // Set the font size of the first letter to 20
-                    fontWeight: FontWeight.bold,
-                    //color: Colors.black,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-                TextSpan(
-                  text: title.substring(1),
-                  style: TextStyle(
-                    fontSize:
-                        18, // Set the font size of the rest of the label to 18
-                    //color: Colors.black,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-              ],
-            ),
+        SizedBox(height: 5),
+        Text(
+          content,
+          style: TextStyle(
+            fontSize: 18,
+            color: Color(0xFF4ECB81),
+            fontWeight: FontWeight.bold,
+            height: 1.5, // Line spacing
           ),
-          SizedBox(height: 5),
-          Text(
-            content,
-            style: TextStyle(
-              fontSize: 18,
-              color: Color(0xFF4ECB81),
-              fontWeight: FontWeight.bold,
-              height: 1.5, // Line spacing
-            ),
-          ),
-          SizedBox(height: 10),
-        ],
-      );
-    }
+        ),
+        SizedBox(height: 10),
+      ],
+    );
   }
 }

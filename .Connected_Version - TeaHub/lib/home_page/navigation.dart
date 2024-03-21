@@ -1,8 +1,8 @@
+import 'package:TeaHub/chatbot_ui/presentation/chatbot_screen/chatbot_screen.dart';
 import 'package:TeaHub/chatbot_ui_updated/ChatScreen.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:TeaHub/TeaDescriptionPage/main.dart';
-import 'package:TeaHub/chatbot_ui/main.dart';
-//import 'package:chatbotui/chatbot_ui/presentation/chatbot_screen/chatbot_screen.dart';
+
 import 'package:TeaHub/home_page/constants.dart';
 import 'package:TeaHub/home_page/scanPage.dart';
 import 'package:TeaHub/pages/home_page.dart';
@@ -24,9 +24,9 @@ class _TeaProfilePageState extends State<navigationPage> {
   //List of the pages
   List<Widget> pages = [
     HomePage(),
-    ChatScreen(), // ChatbotPage(),chatApp()
+    const ChatScreen(),
     TeaProfile(),
-    const UserProfile(), // ProfilePage(),
+    const UserProfile(),
   ];
 
   List<IconData> iconList = [

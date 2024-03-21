@@ -2,11 +2,11 @@ import './ChatScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
-  runApp(const MyApp());
+  runApp(const ChatbotScreen());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ChatbotScreen extends StatelessWidget {
+  const ChatbotScreen({super.key});
 
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,7 +14,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      
       home: ChatScreen(),
+      
     );
   }
 }

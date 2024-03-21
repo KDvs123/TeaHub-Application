@@ -1,4 +1,6 @@
+import 'package:TeaHub/TeaDescriptionPage/main.dart';
 import 'package:TeaHub/chatbot_ui_updated/ChatScreen.dart';
+import 'package:TeaHub/home_page/scanPage.dart';
 import 'package:TeaHub/theme/theme_button.dart';
 import 'package:TeaHub/weather_widget/weather_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -407,7 +409,12 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ScanPage()),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Color.fromARGB(255, 78, 203, 128),
                     backgroundColor: Color.fromARGB(255, 78, 203, 128),
@@ -495,7 +502,12 @@ class HomePage extends StatelessWidget {
 
                 SizedBox(width: 10), // 10 px space between buttons
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => TeaProfile()),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Color.fromARGB(
                         255, 78, 203, 128), //Colors.tealAccent.shade700,
