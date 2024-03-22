@@ -1,9 +1,10 @@
-import 'package:description_page/colors.dart';
-import 'package:description_page/home_screen.dart';
+import 'package:TeaHub/disease_description_treatment/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:TeaHub/disease_description_treatment/colors.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
+  final String disease;
+  const WelcomeScreen({Key? key, required this.disease}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class WelcomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Brown Blight\nDisease",
+            disease,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 50,
@@ -24,7 +25,7 @@ class WelcomeScreen extends StatelessWidget {
             ),
           ),
           Image.asset(
-            "images/welcome.jpg",
+            "assets/images/disease_description_and_treatment_imgs/welcome.jpg",
             fit: BoxFit.cover,
             scale: 1.2,
           ),

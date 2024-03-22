@@ -1,12 +1,16 @@
 import 'dart:io';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
+import 'package:TeaHub/disease_description_treatment/home_screen.dart';
+import 'package:TeaHub/disease_description_treatment/welcome_screen.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:chatbotui/home_page/constants.dart';
+import 'package:TeaHub/home_page/constants.dart';
+import 'package:TeaHub/snap_tips/SnapTips.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-
 
 class ScanPage extends StatefulWidget {
   const ScanPage({Key? key}) : super(key: key);
@@ -109,14 +113,30 @@ class _ScanPageState extends State<ScanPage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showImagePicker(context);
-        },
-        backgroundColor: Constants.primaryColor,
-        child: const FaIcon(
-          FontAwesomeIcons.camera,
-          color: Colors.white,
+      //----- Code - 1 ------//
+
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     _showImagePicker(context);
+      //   },
+      //   backgroundColor: Constants.primaryColor,
+      //   child: const FaIcon(
+      //     FontAwesomeIcons.camera,
+      //     color: Colors.white,
+      //   ),
+      // ),
+      floatingActionButton: ClipRRect(
+        borderRadius:
+            BorderRadius.circular(30.0), // Adjust the value to your preference
+        child: FloatingActionButton(
+          onPressed: () {
+            _showImagePicker(context);
+          },
+          backgroundColor: Constants.primaryColor,
+          child: const FaIcon(
+            FontAwesomeIcons.camera,
+            color: Colors.white,
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -135,7 +155,16 @@ class _ScanPageState extends State<ScanPage> {
         onTap: (index) {
           setState(() {
             _bottomNavIndex = index;
+            if (index == 1) {
+              // Navigate to the page you want
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => SnapTips(),
+              ));
+            }
           });
+          // {
+          //   _bottomNavIndex = index;
+          // });
         },
       ),
     );
@@ -147,6 +176,7 @@ class _ScanPageState extends State<ScanPage> {
       builder: (builder) {
         return Card(
           child: Container(
+            color: Theme.of(context).colorScheme.tertiary,
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height / 5.2,
             margin: const EdgeInsets.only(top: 8.0),
@@ -156,14 +186,20 @@ class _ScanPageState extends State<ScanPage> {
               children: [
                 Expanded(
                   child: InkWell(
-                    child: const Column(
+                    child: Column(
                       children: [
-                        FaIcon(FontAwesomeIcons.images, size: 60.0),
+                        FaIcon(
+                          FontAwesomeIcons.images,
+                          size: 60.0,
+                        ),
                         SizedBox(height: 12.0),
                         Text(
                           "Gallery",
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 16, color: Colors.black),
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                         )
                       ],
                     ),
@@ -175,7 +211,7 @@ class _ScanPageState extends State<ScanPage> {
                 ),
                 Expanded(
                   child: InkWell(
-                    child: const SizedBox(
+                    child: SizedBox(
                       child: Column(
                         children: [
                           FaIcon(FontAwesomeIcons.camera, size: 60.0),
@@ -183,7 +219,10 @@ class _ScanPageState extends State<ScanPage> {
                           Text(
                             "Camera",
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
                           )
                         ],
                       ),
@@ -205,7 +244,9 @@ class _ScanPageState extends State<ScanPage> {
   final picker = ImagePicker();
 
   _imgFromGallery() async {
-    await picker.pickImage(source: ImageSource.gallery, imageQuality: 50).then((value) {
+    await picker
+        .pickImage(source: ImageSource.gallery, imageQuality: 50)
+        .then((value) {
       if (value != null) {
         _cropImage(File(value.path));
       }
@@ -213,7 +254,9 @@ class _ScanPageState extends State<ScanPage> {
   }
 
   _imgFromCamera() async {
-    await picker.pickImage(source: ImageSource.camera, imageQuality: 50).then((value) {
+    await picker
+        .pickImage(source: ImageSource.camera, imageQuality: 50)
+        .then((value) {
       if (value != null) {
         _cropImage(File(value.path));
       }
@@ -244,7 +287,8 @@ class _ScanPageState extends State<ScanPage> {
       uiSettings: [
         AndroidUiSettings(
           toolbarTitle: "Image Cropper",
-          toolbarColor: Colors.deepOrange,
+          toolbarColor: Color.fromARGB(255, 78, 203, 128),
+          //toolbarColor: Colors.deepOrange,
           toolbarWidgetColor: Colors.white,
           initAspectRatio: CropAspectRatioPreset.original,
           lockAspectRatio: false,
@@ -255,10 +299,40 @@ class _ScanPageState extends State<ScanPage> {
       ],
     );
     if (croppedFile != null) {
-      imageCache.clear();
-      setState(() {
-        imageFile = File(croppedFile.path);
+      // Read bytes of the cropped image
+      List<int> imageBytes = await croppedFile.readAsBytes();
+      String base64Image = base64Encode(imageBytes);
+      print(
+          "------------------------------------###-------------------------------------------");
+      print(base64Encode(imageBytes));
+      print(
+          "------------------------------------###-------------------------------------------");
+      // Send image to server
+      var url = 'http://127.0.0.1:5000/predict';
+      var response = await http.post(Uri.parse(url), body: {
+        'image': base64Image,
       });
+
+      if (response.statusCode == 200) {
+        // Parse server response
+        print(
+            "------------------------------------###-------------------------------------------");
+        var result = jsonDecode(response.body);
+        if (result.containsKey('predicted_class')) {
+          String predictedDisease = result['predicted_class'];
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => WelcomeScreen(disease: predictedDisease)),
+          );
+        } else {
+          // Handle error
+          print('Error: ${result['error']}');
+        }
+      } else {
+        // Handle HTTP error
+        print('HTTP Error: ${response.statusCode}');
+      }
     }
   }
 }

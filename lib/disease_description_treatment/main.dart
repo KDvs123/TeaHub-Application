@@ -1,18 +1,19 @@
-import 'package:description_page/welcome_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:TeaHub/disease_description_treatment/welcome_screen.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: WelcomeScreen(),
+      home: WelcomeScreen(
+          disease: "Initial Disease"), // Pass the disease parameter here
     );
   }
 }
