@@ -11,6 +11,28 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 
+class TopEllipsePainter extends CustomPainter {
+  final Color color;
+
+  TopEllipsePainter(this.color);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+
+    // Draw the ellipse
+    var path = Path()
+      ..addOval(Rect.fromLTWH(-50, -100, size.width + 100, 311));
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 
@@ -33,6 +55,38 @@ class HomePage extends StatelessWidget {
   //       .then((snapshot) => null);
   // }
 
+  Widget _buildIconTextButton(BuildContext context, IconData icon, String label, Color backgroundColor, Color iconAndTextColor,VoidCallback onPressed) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        foregroundColor: iconAndTextColor, backgroundColor: backgroundColor, // Foreground (text/icon) color
+        elevation: 15,
+        shadowColor: Colors.black,
+        fixedSize: Size(100, 100),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.primary,
+            width: 0.5,
+          ),
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, size: 40),
+          SizedBox(height: 8), // Spacing between icon and text
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 14,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +94,7 @@ class HomePage extends StatelessWidget {
       drawerEnableOpenDragGesture: false, // Prevent user sliding open
 
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor:  Color(0xFF4ecb81),
         automaticallyImplyLeading: false,
         title: Row(
           children: [
@@ -312,237 +366,44 @@ class HomePage extends StatelessWidget {
       //------------------------ Main page UI ------------------------//
 
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment:
-              CrossAxisAlignment.start, // Align text to the left
           children: [
-            const SizedBox(height: 15),
-            Padding(
-              padding:
-                  EdgeInsets.only(left: 15), // Add bottom padding of 5 pixels
-              child: Text(
-                'Hi User,',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-            ),
-            Padding(
-              padding:
-                  EdgeInsets.only(left: 15), // Add bottom padding of 5 pixels
-              child: Text(
-                'Welcome to Teahub',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  //color: Color(0xFF737373),
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-              ),
-            ),
-            // StreamBuilder<QuerySnapshot>(
-            //     stream:
-            //         FirebaseFirestore.instance.collection('Users').snapshots(),
-            //     builder: (context, snapshot) {
-            //       List<Row> usersWidgets = [];
-            //       if (snapshot.hasData) {
-            //         final users = snapshot.data?.docs.reversed.toList();
-            //         for (var user in users!) {
-            //           final usersWidget = Row(
-            //             children: [
-            //               Text(user['user name']),
-            //             ],
-            //           );
-            //           usersWidgets.add(usersWidget);
-            //         }
-            //       }
-            //       return Expanded(
-            //         child: ListView(
-            //           children: usersWidgets,
-            //         ),
-            //       );
-            //     }),
-            // StreamBuilder<QuerySnapshot>(
-            //   stream:
-            //       FirebaseFirestore.instance.collection('Users').snapshots(),
-            //   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            //     if (snapshot.connectionState == ConnectionState.waiting) {
-            //       return Center(child: CircularProgressIndicator());
-            //     }
-            //     if (snapshot.hasError) {
-            //       return Center(child: Text('Error: ${snapshot.error}'));
-            //     }
-            //     final users = snapshot.data?.docs.reversed.toList();
-            //     return ListView.builder(
-            //       itemCount: users?.length,
-            //       itemBuilder: (context, index) {
-            //         final userData = users?[index].data()
-            //             as Map<String, dynamic>; // Explicit cast
-            //         return ListTile(
-            //           title: Text(userData['user name'] ?? ''),
-            //           // You can add more widgets here to display additional user data
-            //         );
-            //       },
-            //     );
-            //   },
-            // ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 15), // Add bottom padding of 20 pixels
-              child: Text(
-                '${user.email!}',
-                style: TextStyle(
-                  fontSize: 20,
-                  //color: Colors.black,
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SizedBox(height: 30),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Stack(
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ScanPage()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Color.fromARGB(255, 78, 203, 128),
-                    backgroundColor: Color.fromARGB(255, 78, 203, 128),
-                    elevation: 15,
-                    shadowColor: Colors.black,
-                    fixedSize: Size(100, 100),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      side: BorderSide(
-                        color: Theme.of(context).colorScheme.primary,
-                        width: 0.5,
-                      ),
-                    ),
+                CustomPaint(
+                  size: Size(MediaQuery.of(context).size.width, 250),
+                  painter: TopEllipsePainter(Color(0xFF4ecb81)),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).padding.top + 20,
+                    left: 20,
+                    right: 20,
                   ),
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(
                     children: [
-                      Icon(
-                        Icons.camera_alt, // Add your desired icon here
-                        color: Colors.white,
-                        size: 40,
-                      ),
-                      SizedBox(
-                          width:
-                              8), // Adjust the space between icon and text as needed
-                      Text(
-                        'Identify',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Hi Vihanga,',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-
-                SizedBox(width: 10), // 10 px space between buttons
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ChatScreen()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Color.fromARGB(
-                        255, 78, 203, 128), //Colors.tealAccent.shade700,
-                    backgroundColor: Theme.of(context).colorScheme.surfaceTint,
-                    elevation: 15, // Elevation
-                    shadowColor: Colors.black, // Shadow Color
-                    fixedSize: Size(100, 100), // Define height and width here
-                    //backgroundColor: Colors.blue, // Set the desired color here
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          10), // Set border radius to 10 pixels
-                      side: BorderSide(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .primary, // Set border color here
-                        width: 0.5, // Set border width here
-                      ),
-                    ),
-                  ),
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.adb, //reddit, // Add your desired icon here
-                        color: Color.fromARGB(255, 78, 203, 128),
-                        size: 40,
-                      ),
-                      SizedBox(
-                          width:
-                              8), // Adjust the space between icon and text as needed
-                      Text(
-                        'Assist',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 78, 203, 128),
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                SizedBox(width: 10), // 10 px space between buttons
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => TeaProfile()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Color.fromARGB(
-                        255, 78, 203, 128), //Colors.tealAccent.shade700,
-                    backgroundColor: Theme.of(context).colorScheme.surfaceTint,
-                    elevation: 15, // Elevation
-                    shadowColor: Colors.black, // Shadow Color
-                    fixedSize: Size(100, 100), // Define height and width here
-                    //backgroundColor: Colors.blue, // Set the desired color here
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          10), // Set border radius to 10 pixels
-                      side: BorderSide(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .primary, // Set border color here
-                        width: 0.5, // Set border width here
-                      ),
-                    ),
-                  ),
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.menu_book, // Add your desired icon here
-                        color: Color.fromARGB(255, 78, 203, 128),
-                        size: 40,
-                      ),
-                      SizedBox(
-                          width:
-                              8), // Adjust the space between icon and text as needed
-                      Text(
-                        'Educate',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 78, 203, 128),
-                          fontSize: 14,
+                      SizedBox(height: 5),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Welcome to TeaHub',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],
@@ -551,12 +412,60 @@ class HomePage extends StatelessWidget {
               ],
             ),
 
-            const SizedBox(height: 240),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                
+                _buildIconTextButton(
+                  context,
+                  Icons.camera_alt,
+                  'Identify',
+                  Color(0xFF4ecb81), // Background color for "Identify"
+                  Colors.white, // Icon and text color for "Identify"
+                      () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ScanPage()),
+                    );
+                  },
+                ),
+                // The "Assist" button has the new colors
+                _buildIconTextButton(
+                  context,
+                  Icons.message,
+                  'Assist',
+                  Color(0xFFDDB892), // Creamy brown background color
+                  Color(0xFF000000), // Icon and text color
+                      () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ChatScreen()),
+                    );
+                  },
+                ),
+                // The "Educate" button also has the new colors
+                _buildIconTextButton(
+                  context,
+                  Icons.school,
+                  'Educate',
+                  Color(0xFFDDB892), // Creamy brown background color
+                  Color(0xFF000000), // Icon and text color
+                      () {
+                    // Navigator.push logic for 'Educate' button
+                  },
+                ),
+              ],
+            ),
+
+
+            SizedBox(height: 40),
+            priceWidget(),
+            SizedBox(height: 40),
             WeatherPage(),
           ],
         ),
       ),
-      //),
+      
     );
   }
 }
