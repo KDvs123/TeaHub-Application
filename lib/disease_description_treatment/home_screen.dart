@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Find your\nfavorite plants",
+                      "",
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
@@ -58,14 +58,14 @@ class HomeScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "30% OFF",
+                                "",
                                 style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
-                                "02 - 23 July",
+                                "",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black54,
@@ -279,7 +279,8 @@ class HomeScreen extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                ProductScreen2(),
+                                                ProductScreen2(
+                                                    selectedDisease: disease),
                                           ),
                                         );
                                       },
@@ -317,7 +318,8 @@ class HomeScreen extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  ProductScreen2(),
+                                                  ProductScreen2(
+                                                      selectedDisease: disease),
                                             ),
                                           );
                                         },
@@ -344,7 +346,8 @@ class HomeScreen extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  ProductScreen2(),
+                                                  ProductScreen2(
+                                                      selectedDisease: disease),
                                             ),
                                           );
                                         },

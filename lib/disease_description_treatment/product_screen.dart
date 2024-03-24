@@ -8,17 +8,15 @@ class ProductScreen extends StatelessWidget {
   String getDescription(String disease) {
     switch (disease) {
       case 'Algal Leaf Spot':
-        return 'Algal leaf spot is the disease.';
+        return 'Algar leaf spot is a plant disease found in warm, humid areas or in places like greenhouses. It is caused by a green parasitic alga called Cephaleuros virescens. This alga usually lives on plants that have tough, leathery leaves. Tea plants are more likely to get infected when the soil does not drain properly, when the nutrients aren’t balanced, and they’re in hot and humid places.'; // Change the description text here
       case 'Brown Blight':
-        return 'Brown Blight is the disease.';
+        return 'Brown blight is a widespread leaf disease found in all tea fields. It appears in weakened or injured bushes due to hard plucking, herbicide exposure, sun damage, waterlogging, and stem issues.';
       case 'Gray Blight':
-        return 'Gray Blight is the disease.';
-      case 'Healthy':
-        return 'Healthy is the disease.';
+        return 'Gray blight is caused by the Pestalotiopsis fungus and affects both young and old leaves. When new shoots are infected, they start dying.';
       case 'Helopeltis':
-        return 'Helopeltis is the disease.';
+        return 'Helopeltis is a genus of insects in the family Miridae, commonly known as mosquito bugs. These insects are known for their economic significance as pests, particularly in agriculture. There are several species in the genus Helopeltis that can damage a variety of crops. Helopeltis Antoni, H. Brady, H. Sabora is the predominant species that attacks crops. Affected crops include cocoa, cashews, cotton, and tea.';
       case 'Red Leaf Spot':
-        return 'Red Leaf Spot is the disease.';
+        return 'Red leaf spot is a disease that occurs on creeping bentgrass when it’s warm and wet in spring, summer, or fall. It is caused by a type of disease called "Helminthosporium" which includes several diseases caused by fungi. These fungi create big, cigar-shaped spores.';
       default:
         return 'Description not found';
     }
@@ -26,8 +24,7 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String description = getDescription(
-        selectedDisease); // Implement this function to get description based on the selected disease
+    String description = getDescription(selectedDisease);
     return Scaffold(
       backgroundColor: colors.whiteClr,
       body: SafeArea(
@@ -49,7 +46,7 @@ class ProductScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "",
+                    "Description",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Container(
@@ -75,7 +72,7 @@ class ProductScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Plant Name",
+                    selectedDisease, // Display the selected disease
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                   Row(
@@ -86,8 +83,9 @@ class ProductScreen extends StatelessWidget {
             ),
             SizedBox(height: 15),
             Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Text(description)),
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Text(description),
+            ),
           ],
         ),
       ),
