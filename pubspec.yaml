@@ -172,6 +172,9 @@ assets:
   #email verification ui
   - assets/emailverificationui/tick.png
 
+  #disease not found ui
+  - assets/dieasenotfound/error.json
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
