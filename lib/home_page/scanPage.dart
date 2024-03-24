@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:TeaHub/disease_description_treatment/product_screen.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:TeaHub/disease_description_treatment/home_screen.dart';
@@ -244,13 +245,11 @@ class _ScanPageState extends State<ScanPage> {
   final picker = ImagePicker();
 
   _imgFromGallery() async {
-    await picker
-        .pickImage(source: ImageSource.gallery, imageQuality: 50)
-        .then((value) {
-      if (value != null) {
-        _cropImage(File(value.path));
-      }
-    });
+    final pickedFile =
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    if (pickedFile != null) {
+      _cropImage(File(pickedFile.path));
+    }
   }
 
   _imgFromCamera() async {
@@ -264,75 +263,40 @@ class _ScanPageState extends State<ScanPage> {
   }
 
   _cropImage(File imgFile) async {
-    final croppedFile = await ImageCropper().cropImage(
-      sourcePath: imgFile.path,
-      aspectRatioPresets: Platform.isAndroid
-          ? [
-              CropAspectRatioPreset.square,
-              CropAspectRatioPreset.ratio3x2,
-              CropAspectRatioPreset.original,
-              CropAspectRatioPreset.ratio4x3,
-              CropAspectRatioPreset.ratio16x9
-            ]
-          : [
-              CropAspectRatioPreset.original,
-              CropAspectRatioPreset.square,
-              CropAspectRatioPreset.ratio3x2,
-              CropAspectRatioPreset.ratio4x3,
-              CropAspectRatioPreset.ratio5x3,
-              CropAspectRatioPreset.ratio5x4,
-              CropAspectRatioPreset.ratio7x5,
-              CropAspectRatioPreset.ratio16x9
-            ],
-      uiSettings: [
-        AndroidUiSettings(
-          toolbarTitle: "Image Cropper",
-          toolbarColor: Color.fromARGB(255, 78, 203, 128),
-          //toolbarColor: Colors.deepOrange,
-          toolbarWidgetColor: Colors.white,
-          initAspectRatio: CropAspectRatioPreset.original,
-          lockAspectRatio: false,
-        ),
-        IOSUiSettings(
-          title: "Image Cropper",
-        )
-      ],
-    );
-    if (croppedFile != null) {
-      // Read bytes of the cropped image
-      List<int> imageBytes = await croppedFile.readAsBytes();
-      String base64Image = base64Encode(imageBytes);
-      print(
-          "------------------------------------###-------------------------------------------");
-      print(base64Encode(imageBytes));
-      print(
-          "------------------------------------###-------------------------------------------");
-      // Send image to server
-      var url = 'http://127.0.0.1:5000/predict';
-      var response = await http.post(Uri.parse(url), body: {
-        'image': base64Image,
-      });
+    List<int> imageBytes = await imgFile.readAsBytes();
+    String base64Image = base64Encode(imageBytes);
+    var url = 'https://teahub-model-deploy-b3efb87f9078.herokuapp.com/predict';
 
-      if (response.statusCode == 200) {
-        // Parse server response
-        print(
-            "------------------------------------###-------------------------------------------");
-        var result = jsonDecode(response.body);
-        if (result.containsKey('predicted_class')) {
-          String predictedDisease = result['predicted_class'];
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => WelcomeScreen(disease: predictedDisease)),
-          );
-        } else {
-          // Handle error
-          print('Error: ${result['error']}');
-        }
-      } else {
-        // Handle HTTP error
-        print('HTTP Error: ${response.statusCode}');
-      }
+    var requestBody = jsonEncode({
+      "image": base64Image,
+    });
+    var response = await http.post(
+      Uri.parse(url),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: requestBody,
+      // Use the JSON-encoded data here
+    );
+
+    print(response.body);
+    print(response.statusCode);
+    print("###############--------------------------------------------");
+    if (response.statusCode == 200) {
+      var result = jsonDecode(response.body);
+      if (result.containsKey('predicted_class')) {
+        String predictedDisease = result['predicted_class'];
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => WelcomeScreen(disease: predictedDisease)),
+        );
+      } else {}
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ProductScreen()),
+      );
     }
   }
 }
