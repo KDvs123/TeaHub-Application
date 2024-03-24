@@ -35,7 +35,7 @@ class _DiseaseInfoScreenState extends State<DiseaseInfoScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: screenHeight * 0.25), // Adjust the space for the AppBar
+              SizedBox(height: screenHeight * 0.25), 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
@@ -104,7 +104,7 @@ class _DiseaseInfoScreenState extends State<DiseaseInfoScreen> {
                             color: Color(0xFF000000),
                           ),
                         ),
-                        SizedBox(height: 24), // Additional spacing before the slider
+                        SizedBox(height: 24), 
                         Center(
                           child: GestureDetector(
                             onHorizontalDragUpdate: (details) {
@@ -115,8 +115,8 @@ class _DiseaseInfoScreenState extends State<DiseaseInfoScreen> {
                             },
                             onHorizontalDragEnd: (details) {
                               if (_dragExtent >= MediaQuery.of(context).size.width - 240.0) {
-                                // TODO: Navigate to the treatment plan screen
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => DiseaseInfoScreen()));
+                              
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Treatment()));
                               }
                               setState(() {
                                 _dragExtent = 0.0;
