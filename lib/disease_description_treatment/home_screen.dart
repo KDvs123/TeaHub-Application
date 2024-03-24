@@ -1,10 +1,12 @@
-import 'package:description_page/product_screen.dart';
-import 'package:description_page/product_screen2.dart';
+import 'package:TeaHub/disease_description_treatment/product_screen.dart';
+import 'package:TeaHub/disease_description_treatment/product_screen2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'colors.dart';
 
 class HomeScreen extends StatelessWidget {
+  final String disease;
+  HomeScreen({required this.disease});
   List<String> catergories = [];
 
   @override
@@ -72,7 +74,7 @@ class HomeScreen extends StatelessWidget {
                             ],
                           ),
                           Image.asset(
-                            "images/plant.jpg",
+                            "assets/images/disease_description_and_treatment_imgs/plant.jpg",
                           ),
                         ],
                       ),
@@ -157,8 +159,8 @@ class HomeScreen extends StatelessWidget {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                ProductScreen(),
+                                            builder: (context) => ProductScreen(
+                                                selectedDisease: disease),
                                           ),
                                         );
                                       },
@@ -167,7 +169,7 @@ class HomeScreen extends StatelessWidget {
                                           Padding(
                                             padding: const EdgeInsets.all(15),
                                             child: Image.asset(
-                                              "images/plant${index + 1}.png",
+                                              "assets/images/disease_description_and_treatment_imgs/plant${index + 1}.png",
                                             ),
                                           ),
                                           Positioned(
@@ -196,7 +198,8 @@ class HomeScreen extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  ProductScreen(),
+                                                  ProductScreen(
+                                                      selectedDisease: disease),
                                             ),
                                           );
                                         },
@@ -223,7 +226,8 @@ class HomeScreen extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  ProductScreen(),
+                                                  ProductScreen(
+                                                      selectedDisease: disease),
                                             ),
                                           );
                                         },
@@ -284,7 +288,7 @@ class HomeScreen extends StatelessWidget {
                                           Padding(
                                             padding: const EdgeInsets.all(15),
                                             child: Image.asset(
-                                              "images/plant${index + 1}.png",
+                                              "assets/images/disease_description_and_treatment_imgs/plant${index + 1}.png",
                                             ),
                                           ),
                                           Positioned(

@@ -24,6 +24,8 @@ class _ScanPageState extends State<ScanPage> {
   int _bottomNavIndex = 0;
   File? imageFile;
 
+  get disease => null;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -295,7 +297,8 @@ class _ScanPageState extends State<ScanPage> {
     } else {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => ProductScreen()),
+        MaterialPageRoute(
+            builder: (context) => ProductScreen(selectedDisease: disease)),
       );
     }
   }
