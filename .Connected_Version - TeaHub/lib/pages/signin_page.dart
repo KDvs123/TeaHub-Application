@@ -33,22 +33,39 @@ class _RegisterPageState extends State<RegisterPage> {
       },
     );
 
+    // Check if username field is empty
+    if (userNameController.text.isEmpty) {
+      // Username field is empty, show error message
+      Navigator.pop(context); // Dismiss the loading circle
+      userNameErrorMessage();
+
+      return; // Exit the method
+    }
+
     //try creating the user
     try {
       if (passwordController.text == confirmpasswordController.text) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        // Assuming you have a UserCredential object named userCredential
+        UserCredential userCredential;
+        userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text,
         );
 
-        addUserDetails(userNameController.text.trim());
+        // Accessing uid from the User object within UserCredential
+        String? uid = userCredential?.user?.uid;
+
+        if (uid != null) {
+          addUserDetails(userNameController.text.trim(), uid!);
+        }
 
         Navigator.pop(context);
       } else {
         //showErrorMessage("error");
         Navigator.pop(context);
         // show error message, passwords dont't match
-        EmailInErrorMessage();
+        mainError();
       }
 
       //Navigator.pop(context);
@@ -71,9 +88,10 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
-  Future addUserDetails(String userName) async {
+  Future addUserDetails(String userName, String uid) async {
     await FirebaseFirestore.instance.collection('Users').add({
-      'user name': userName,
+      'username': userName,
+      'uid': uid,
     });
   }
 
@@ -90,6 +108,49 @@ class _RegisterPageState extends State<RegisterPage> {
               style: const TextStyle(color: Colors.white),
             ),
           ),
+        );
+      },
+    );
+  }
+
+  void userNameErrorMessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
+          title: const Text(
+            'User Name Error',
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: Text(
+            'It seems like the username\nfield is empty. Please enter\nyour username to continue.',
+            style: TextStyle(
+              fontSize: 16,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the dialog
+              },
+              child: const Text(
+                'OK',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 18,
+                ),
+              ),
+            ),
+          ],
         );
       },
     );
@@ -315,23 +376,66 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
+  void mainError() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
+          title: const Text(
+            'Invalid credentials',
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: Text(
+            'Please ensure that all your credentials are entered correctly to proceed with signing in.',
+            style: TextStyle(
+              fontSize: 16,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the dialog
+              },
+              child: const Text(
+                'OK',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 18,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            size: 35,
-            //color: Colors.black,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Theme.of(context).colorScheme.background,
+      //   leading: IconButton(
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     },
+      //     icon: Icon(
+      //       Icons.arrow_back,
+      //       size: 35,
+      //       //color: Colors.black,
+      //       color: Theme.of(context).colorScheme.primary,
+      //     ),
+      //   ),
+      // ),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
           child: Center(
@@ -477,7 +581,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
               const SizedBox(height: 30),
 
-              // not a member? register now
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
