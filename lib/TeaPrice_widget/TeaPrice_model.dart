@@ -119,7 +119,7 @@ class _priceWidgetState extends State<priceWidget> {
           } else {
             return Container(
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 78, 203, 128),
+                color: Color(0xFFDDB892).withOpacity(0.8),
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(

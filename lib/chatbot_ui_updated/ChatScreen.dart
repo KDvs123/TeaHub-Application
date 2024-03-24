@@ -44,13 +44,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
     String apiKey = "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"; // Replace with your actual API key
     
-    // Add the user's message to the chat
-
-    setState(() {
-      msgs.add(Message(sender: true, text: text)); 
-
-      isTyping = true;
-    });
+    
 
     // Clear input field and animate scroll
 

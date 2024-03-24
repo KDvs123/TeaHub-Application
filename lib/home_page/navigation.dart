@@ -24,10 +24,10 @@ class _TeaProfilePageState extends State<TeaProfilePage> {
 
   //List of the pages
   List<Widget> pages= const [
-      // // HomePage(),
-      // ChatbotPage(),
-      // TeaProfilePage(),
-      // ProfilePage(),
+      HomePage(),
+      const ChatScreen(),
+    TeaProfileUI(),
+     const UserProfile(),
     ];
 
 

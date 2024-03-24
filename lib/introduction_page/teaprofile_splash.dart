@@ -55,7 +55,7 @@ class TeaProfileUI extends StatelessWidget {
                       padding: EdgeInsets.only(bottom: 16.0), // Shift the image up
                       child: Image.asset(
                         'assets/introsplash/teaprofile.png',
-                        width: 200,
+                        width: 300,
                       ),
                     ),
                     Padding(
@@ -93,8 +93,8 @@ class TeaProfileUI extends StatelessWidget {
                       Material(
                         color: Colors.transparent,
                         child: InkWell(
-                          onTap: () {
-                            // Handle the start button press
+                           onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => TeaProfile()));
                           },
                           child: Container(
                             width: 80,
