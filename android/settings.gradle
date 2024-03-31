@@ -2,13 +2,19 @@ pluginManagement {
     def flutterSdkPath = {
         def properties = new Properties()
         file("local.properties").withInputStream { properties.load(it) }
-        def flutterSdkPath = properties.getProperty("flutter.sdk")
-        assert flutterSdkPath != null, "flutter.sdk not set in local.properties"
-        return flutterSdkPath
+        def flutterSdk = properties.getProperty("flutter.sdk")
+        if (flutterSdk == null) {
+            throw new FileNotFoundException("Flutter SDK path not found in local.properties file.")
+        }
+        // Convert to Unix-style path if necessary (useful for local Windows development)
+        return flutterSdk.replace('\\', '/')
     }
     settings.ext.flutterSdkPath = flutterSdkPath()
 
-    includeBuild("${settings.ext.flutterSdkPath.replace('\\', '/')}/packages/flutter_tools/gradle")
+    // This print statement is for debugging; remove it once the path issue is resolved
+    println("Flutter SDK Path: " + settings.ext.flutterSdkPath)
+
+    includeBuild("${settings.ext.flutterSdkPath}/packages/flutter_tools/gradle")
 
 
     repositories {
