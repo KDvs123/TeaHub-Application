@@ -21,6 +21,10 @@ jobs:
             - name: Grant execute permission for gradlew
               run: chmod +x ./android/gradlew
 
+            - name: Set FLUTTER_HOME environment variable
+              run: echo "FLUTTER_HOME=${{ github.workspace }}/flutter" >> $GITHUB_ENV
+
+
             - name: Build With Gradle
               run: cd android && ./gradlew build
 
