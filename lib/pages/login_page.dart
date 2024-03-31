@@ -1,10 +1,13 @@
+import 'package:chatbotui/components/login_button.dart';
+import 'package:chatbotui/components/my_textfield.dart';
+import 'package:chatbotui/components/square_tile.dart';
+import 'package:chatbotui/services/authentication_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:teahub/components/login_button.dart';
-import 'package:teahub/components/my_textfield.dart';
-import 'package:teahub/components/square_tile.dart';
-import 'package:teahub/pages/signin_page.dart';
-import 'package:teahub/services/authentication_service.dart';
+// import 'package:teahub/components/login_button.dart';
+// import 'package:teahub/components/my_textfield.dart';
+// import 'package:teahub/components/square_tile.dart';
+// import 'package:teahub/services/authentication_service.dart';
 import 'package:flutter/cupertino.dart';
 
 class LoginPage extends StatefulWidget {
@@ -40,22 +43,25 @@ class _LoginPageState extends State<LoginPage> {
       //pop the loading circle
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
+      //Display exception in terminal
       print("Exception code : ${e.code}");
       //pop the loading circle
       Navigator.pop(context);
       //invalid user
       if (e.code == 'invalid-credential') {
-        //show error to user
+        //Display error to user
         invalidUserMessage();
       } else if (e.code == 'invalid-email') {
-        //show error to user
+        //Display error to user
         invalidEmailMessage();
       } else if (e.code == 'channel-error') {
+        //Display error to user
         emptyUserMessage();
       }
     }
   }
 
+  // Error message - Display an error message if the user input is empty
   void emptyUserMessage() {
     showDialog(
       context: context,
@@ -97,6 +103,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  // Email error message - Display error message if the user's email is invalid
   void invalidEmailMessage() {
     showDialog(
       context: context,
@@ -138,6 +145,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  // Invalid user message - Display error message if the user credentials are invalid
   void invalidUserMessage() {
     showDialog(
       context: context,
@@ -187,8 +195,7 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => SigninPage()));
+            Navigator.pop(context);
           },
           icon: const Icon(
             Icons.arrow_back,
@@ -233,6 +240,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 30),
 
+                // Email textfield
                 MyTextField(
                   controller: emailController,
                   hintText: 'Enter your email',
@@ -241,29 +249,49 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 30),
 
+                // Password textfield
                 MyTextField(
                   controller: passwordController,
                   hintText: 'Enter your password',
                   obscureText: true,
                 ),
 
-                const Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        'Forgot password?',
-                        style: TextStyle(
-                          color: Colors.grey,
+                      GestureDetector(
+                        onTap: () {
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => ForgotPassword()),
+                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return ForgotPassword();
+                              },
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'Forgot password?',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontSize: 15,
+                          ),
                         ),
                       ),
                     ],
                   ),
-                ),
+                ),
 
                 const SizedBox(height: 40),
 
+                //Login button
                 LoginButton(
                   onTap: UserLogin,
                 ),
@@ -295,6 +323,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 40),
 
+                //Facebook, Google and Apple icons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -325,9 +354,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextButton(
                       onPressed: () {
-                        //Navigator.pop(context);
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => SigninPage()));
+                        Navigator.pop(context);
                       },
                       child: const Text(
                         ' Register Now',
