@@ -1,8 +1,14 @@
 pluginManagement {
-    def flutterSdkPath = System.getenv('FLUTTER_HOME') ?: flutterSdkDefaultPath()
-    settings.ext.flutterSdkPath = flutterSdkPath
+    def flutterSdkPath = {
+        def properties = new Properties()
+        file("local.properties").withInputStream { properties.load(it) }
+        def flutterSdkPath = properties.getProperty("flutter.sdk")
+        assert flutterSdkPath != null, "flutter.sdk not set in local.properties"
+        return flutterSdkPath
+    }
+    settings.ext.flutterSdkPath = flutterSdkPath()
 
-    includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
+    includeBuild("${settings.ext.flutterSdkPath}/packages/flutter_tools/gradle")
 
     repositories {
         google()
@@ -14,14 +20,6 @@ pluginManagement {
         id "dev.flutter.flutter-gradle-plugin" version "1.0.0" apply false
     }
 }
-
-// Add this method to handle determining a default Flutter SDK path if needed
-def flutterSdkDefaultPath() {
-    def properties = new Properties()
-    file("local.properties").withInputStream { properties.load(it) }
-    return properties.getProperty("flutter.sdk") ?: throw new GradleException("Flutter SDK path not found. Please set FLUTTER_HOME environment variable or flutter.sdk in local.properties.")
-}
-
 
 plugins {
     id "dev.flutter.flutter-plugin-loader" version "1.0.0"
