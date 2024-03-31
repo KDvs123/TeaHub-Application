@@ -40,4 +40,4 @@ TeaHub's frontend is built using the following technologies and frameworks:
 
 ## Demo Video
 
-Watch a demo of TeaHub in action: [TeaHub Demo](https://drive.google.com/file/d/1PEGISSPS_rd8GZkrcsIA9mOYqnYTLBx5/view?usp=drive_link)
+Watch a demo of TeaHub in action: [TeaHub Demo](https://youtu.be/2iHpHL09d5k)
