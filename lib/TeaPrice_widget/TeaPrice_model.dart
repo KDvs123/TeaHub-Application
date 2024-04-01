@@ -16,7 +16,7 @@ class _priceWidgetState extends State<priceWidget> {
   Future<Map<String, dynamic>> fetchAlbum() async {
     final response = await http.get(
         Uri.parse('https://mocki.io/v1/09da860c-0e99-412e-bb12-a96aa37ad21c'));
-    //https://mocki.io/v1/09da860c-0e99-412e-bb12-a96aa37ad21c
+
     if (response.statusCode == 200) {
       // If the server returns a 200 OK response, parse the JSON.
       final Map<String, dynamic> data = json.decode(response.body);
@@ -24,7 +24,8 @@ class _priceWidgetState extends State<priceWidget> {
 
       return data;
     } else {
-      String jsonData = await rootBundle.loadString('assets/TeaPrice_data.json');
+      String jsonData =
+          await rootBundle.loadString('assets/TeaPrice_data.json');
       Map<String, dynamic> data = json.decode(jsonData);
 
       // Throw an exception indicating failure to load album
